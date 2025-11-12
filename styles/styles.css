@@ -6,7 +6,7 @@
 
 body {
   font-family: "Arial", sans-serif;
-  background: linear-gradient(135deg, #eb9a03 0%, #1f1400 100%);
+  background: #63696e;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -117,7 +117,7 @@ h1 {
 }
 
 .card-front {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #2e3133;
   color: white;
   font-weight: bold;
 }
@@ -129,7 +129,7 @@ h1 {
 }
 
 .card:not(.flipped):not(.matched):hover .card-front {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: #2e3133;
   transform: scale(1.05);
 }
 

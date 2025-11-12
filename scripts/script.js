@@ -1,4 +1,3 @@
-// Card symbols (6 pairs = 12 cards)
 const cardSymbols = ['🎮', '🎯', '🎨', '🎭', '🎪', '🎸'];
 
 // Game state
@@ -8,55 +7,30 @@ let matchedPairs = 0;
 let moves = 0;
 let isProcessing = false;
 
-// DOM elements
 const gameBoard = document.getElementById('game-board');
 const moveCount = document.getElementById('move-count');
 const restartBtn = document.getElementById('restart-btn');
 const winMessage = document.getElementById('win-message');
 const finalMoves = document.getElementById('final-moves');
 
-// Initialize game
-function initGame() {
-    // Reset game state
-    cards = [];
-    flippedCards = [];
-    matchedPairs = 0;
-    moves = 0;
-    isProcessing = false;
-    
-    // Update UI
-    moveCount.textContent = moves;
-    winMessage.classList.add('hidden');
-    gameBoard.innerHTML = '';
-    
-    // Create pairs of cards
-    const cardPairs = [...cardSymbols, ...cardSymbols];
-    
-    // Shuffle cards
-    cards = shuffleArray(cardPairs);
-    
-    // Generate card elements
-    createCards();
-}
-
-// Shuffle array using Fisher-Yates algorithm
+// Shuffle cards
 function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+    return array.sort(() => Math.random() - 0.5);
 }
 
 // Create card elements
 function createCards() {
-    cards.forEach((symbol, index) => {
+    // Loop through every emoji in our shuffled list
+    for (let symbol of cards) {
+        console.log(symbol);
+        // 1. Create the main card box
         const card = document.createElement('div');
         card.classList.add('card');
-        card.dataset.cardId = index;
+        
+        // 2. Store the secret emoji on the element (so we can check matches later)
         card.dataset.symbol = symbol;
         
+        // 3. Create the HTML for the flip effect (Front is '?', Back is the emoji)
         card.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">?</div>
@@ -64,9 +38,12 @@ function createCards() {
             </div>
         `;
         
+        // 4. Make it clickable
         card.addEventListener('click', handleCardClick);
+        
+        // 5. Add it to the game board
         gameBoard.appendChild(card);
-    });
+    }
 }
 
 // Handle card click
@@ -115,7 +92,7 @@ function checkMatch() {
             setTimeout(showWinMessage, 500);
         }
     } else {
-        // No match - flip cards back after delay
+        // When the card flipped is not matching, flip cards back after delay
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
@@ -125,13 +102,32 @@ function checkMatch() {
     }
 }
 
+// Initialize game
+function initGame() {
+    cards = [];
+    flippedCards = [];
+    matchedPairs = 0;
+    moves = 0;
+    isProcessing = false;
+    
+    // Update UI
+    moveCount.textContent = moves;
+    winMessage.classList.add('hidden');
+    gameBoard.innerHTML = '';
+    
+    // Create pairs of cards
+    const cardPairs = [...cardSymbols, ...cardSymbols];
+    
+    cards = shuffleArray(cardPairs);
+    createCards();
+}
+
 // Show win message
 function showWinMessage() {
     finalMoves.textContent = moves;
     winMessage.classList.remove('hidden');
 }
 
-// Restart game
 restartBtn.addEventListener('click', initGame);
 
 // Start the game when page loads
