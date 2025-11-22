@@ -131,4 +131,18 @@ function showWinMessage() {
 restartBtn.addEventListener('click', initGame);
 
 // Start the game when page loads
-initGame();
+// Start Game Logic
+const welcomeScreen = document.getElementById('welcome-screen');
+const startBtn = document.getElementById('start-btn');
+const gameContainer = document.getElementById('game-container');
+
+function startGame() {
+    welcomeScreen.classList.add('hidden');
+    gameContainer.classList.remove('hidden');
+    initGame();
+}
+
+startBtn.addEventListener('click', startGame);
+
+// Remove auto-init
+// initGame();
