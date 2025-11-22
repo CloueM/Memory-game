@@ -89,6 +89,7 @@ function checkMatch() {
         if (currentDifficulty !== 'chill') {
             timeLeft = Math.min(timeLeft + DIFFICULTIES[currentDifficulty].modifier, MAX_TIME);
             updateTimerDisplay();
+            triggerGlow('green');
         }
 
         flippedCards = [];
@@ -103,6 +104,7 @@ function checkMatch() {
         if (currentDifficulty !== 'chill') {
             timeLeft -= DIFFICULTIES[currentDifficulty].modifier;
             updateTimerDisplay();
+            triggerGlow('red');
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 gameOver();
@@ -134,6 +136,20 @@ function startTimer(seconds) {
             gameOver();
         }
     }, 1000);
+}
+
+function triggerGlow(type) {
+    const timerContainer = document.querySelector('.timer-container');
+    timerContainer.classList.remove('glow-green', 'glow-red');
+    
+    // Force reflow to restart animation if needed
+    void timerContainer.offsetWidth;
+    
+    timerContainer.classList.add(`glow-${type}`);
+    
+    setTimeout(() => {
+        timerContainer.classList.remove(`glow-${type}`);
+    }, 500);
 }
 
 function updateTimerDisplay() {
