@@ -21,7 +21,40 @@
     p {
         color: $text-color-dark;
         font-size: 1.3rem;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        
+        &.small-text {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+    }
+
+    #final-score {
+        color: $secondary-color;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .score-details {
+        background: #f7fafc;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        text-align: left;
+    }
+
+    .detail-item {
+        font-size: 1.1rem;
+        color: $text-color-dark;
+        
+        span {
+            font-weight: bold;
+            color: $primary-color;
+        }
     }
 
     .modal-buttons {

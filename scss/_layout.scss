@@ -18,15 +18,36 @@
     gap: 10px;
 }
 
-.moves {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: $text-color-dark;
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px $shadow-light;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-#move-count {
-    color: $primary-color;
-    font-size: 1.5rem;
+.stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-item {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: $text-color-dark;
+
+    span {
+        color: $primary-color;
+        font-size: 1.3rem;
+    }
+
+    &.right span { color: #48bb78; }
+    &.wrong span { color: #e53e3e; }
 }
 
 .timer-container {

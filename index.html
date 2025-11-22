@@ -25,8 +25,10 @@
         <h1>Memory Card Game</h1>
         
         <div class="game-info">
-            <div class="moves">
-                Moves: <span id="move-count">0</span>
+            <div class="stats">
+                <div class="stat-item">Moves: <span id="move-count">0</span></div>
+                <div class="stat-item right">Right: <span id="right-count">0</span></div>
+                <div class="stat-item wrong">Wrong: <span id="wrong-count">0</span></div>
             </div>
             <div class="timer-container">
                 <div id="timer-bar"></div>
@@ -39,7 +41,15 @@
 
         <div id="win-message" class="win-message hidden">
             <h2>You Win!</h2>
-            <p>Completed in <span id="final-moves">0</span> moves!</p>
+            <p>Score: <span id="final-score">0</span></p>
+            
+            <div class="score-details">
+                <div class="detail-item">✅ Right: <span id="final-right">0</span></div>
+                <div class="detail-item">❌ Wrong: <span id="final-wrong">0</span></div>
+                <div class="detail-item">⏱️ Time: <span id="final-time">0</span>s</div>
+                <div class="detail-item">⚡ Multiplier: <span id="final-multiplier">1x</span></div>
+            </div>
+
             <div class="modal-buttons">
                 <button class="play-again-btn">Play Again</button>
                 <button class="main-menu-btn">Main Menu</button>

@@ -5,6 +5,8 @@ let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
 let moves = 0;
+let rightMoves = 0;
+let wrongMoves = 0;
 let isProcessing = false;
 let timerInterval;
 let timeLeft;
@@ -13,19 +15,22 @@ let currentDifficulty;
 const MAX_TIME = 60;
 
 const DIFFICULTIES = {
-    chill: null,
-    easy: { startTime: 60, modifier: 2 },
-    medium: { startTime: 45, modifier: 3 },
-    hard: { startTime: 30, modifier: 4 },
-    wth: { startTime: 15, modifier: 5 }
+    chill: { startTime: null, modifier: 0, multiplier: 1 },
+    easy: { startTime: 60, modifier: 2, multiplier: 1.2 },
+    medium: { startTime: 45, modifier: 3, multiplier: 1.5 },
+    hard: { startTime: 30, modifier: 4, multiplier: 2 },
+    wth: { startTime: 15, modifier: 5, multiplier: 3 }
 };
 
 const gameBoard = document.getElementById('game-board');
 const moveCount = document.getElementById('move-count');
+const rightCount = document.getElementById('right-count');
+const wrongCount = document.getElementById('wrong-count');
 const restartBtn = document.getElementById('restart-btn');
 const winMessage = document.getElementById('win-message');
 const gameOverMessage = document.getElementById('game-over-message');
 const finalMoves = document.getElementById('final-moves');
+const finalScore = document.getElementById('final-score');
 const welcomeScreen = document.getElementById('welcome-screen');
 const gameContainer = document.getElementById('game-container');
 
@@ -84,6 +89,8 @@ function checkMatch() {
         card1.classList.add('matched');
         card2.classList.add('matched');
         matchedPairs++;
+        rightMoves++;
+        rightCount.textContent = rightMoves;
         
         // Add time bonus
         if (currentDifficulty !== 'chill') {
@@ -101,6 +108,9 @@ function checkMatch() {
         }
     } else {
         // No match
+        wrongMoves++;
+        wrongCount.textContent = wrongMoves;
+
         if (currentDifficulty !== 'chill') {
             timeLeft -= DIFFICULTIES[currentDifficulty].modifier;
             updateTimerDisplay();
@@ -181,9 +191,13 @@ function initGame(difficulty) {
     flippedCards = [];
     matchedPairs = 0;
     moves = 0;
+    rightMoves = 0;
+    wrongMoves = 0;
     isProcessing = false;
     
     moveCount.textContent = moves;
+    rightCount.textContent = 0;
+    wrongCount.textContent = 0;
     winMessage.classList.add('hidden');
     gameOverMessage.classList.add('hidden');
     
@@ -191,7 +205,7 @@ function initGame(difficulty) {
     cards = shuffleArray(cardPairs);
     createCards();
 
-    if (DIFFICULTIES[difficulty]) {
+    if (DIFFICULTIES[difficulty].startTime) {
         startTimer(DIFFICULTIES[difficulty].startTime);
     } else {
         clearInterval(timerInterval);
@@ -200,9 +214,33 @@ function initGame(difficulty) {
     }
 }
 
+function calculateScore() {
+    const totalMoves = rightMoves + wrongMoves;
+    const accuracy = totalMoves === 0 ? 0 : (rightMoves / totalMoves) * 100;
+    
+    let timeFactor = 100;
+    if (currentDifficulty !== 'chill') {
+        timeFactor = (timeLeft / MAX_TIME) * 100;
+    }
+    
+    // Weighted Score: 60% Accuracy, 40% Time
+    let baseScore = (accuracy * 0.6) + (timeFactor * 0.4);
+    
+    // Apply Difficulty Multiplier
+    let final = Math.round(baseScore * DIFFICULTIES[currentDifficulty].multiplier);
+    
+    return final;
+}
+
 // Show win message
 function showWinMessage() {
-    finalMoves.textContent = moves;
+    finalScore.textContent = calculateScore();
+    
+    document.getElementById('final-right').textContent = rightMoves;
+    document.getElementById('final-wrong').textContent = wrongMoves;
+    document.getElementById('final-time').textContent = currentDifficulty === 'chill' ? '∞' : timeLeft;
+    document.getElementById('final-multiplier').textContent = `${DIFFICULTIES[currentDifficulty].multiplier}x`;
+    
     winMessage.classList.remove('hidden');
 }
 

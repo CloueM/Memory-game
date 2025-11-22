@@ -45,15 +45,38 @@ h1 {
   gap: 10px;
 }
 
-.moves {
-  font-size: 1.2rem;
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-item {
+  font-size: 1.1rem;
   font-weight: bold;
   color: #333;
 }
-
-#move-count {
+.stat-item span {
   color: #667eea;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+.stat-item.right span {
+  color: #48bb78;
+}
+.stat-item.wrong span {
+  color: #e53e3e;
 }
 
 .timer-container {
@@ -198,7 +221,35 @@ h1 {
 .win-message p {
   color: #333;
   font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+.win-message p.small-text {
+  font-size: 1rem;
+  color: #666;
   margin-bottom: 20px;
+}
+.win-message #final-score {
+  color: #764ba2;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.win-message .score-details {
+  background: #f7fafc;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: left;
+}
+.win-message .detail-item {
+  font-size: 1.1rem;
+  color: #333;
+}
+.win-message .detail-item span {
+  font-weight: bold;
+  color: #667eea;
 }
 .win-message .modal-buttons {
   display: flex;
