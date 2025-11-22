@@ -1,0 +1,22 @@
+@use 'variables' as *;
+
+#restart-btn {
+    background: $primary-color;
+    color: $text-color-light;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: bold;
+
+    &:hover {
+        background: $secondary-color;
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}

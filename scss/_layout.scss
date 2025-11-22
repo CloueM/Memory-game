@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px $shadow-light;
+}
+
+.moves {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $text-color-dark;
+}
+
+#move-count {
+    color: $primary-color;
+    font-size: 1.5rem;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px $shadow-medium;
+
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 15px;
+    }
+}
+
+.hidden {
+    display: none;
+}

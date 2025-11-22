@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+body {
+    font-family: $font-stack;
+    background: $bg-color;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: $text-color-light;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px $shadow-dark;
+
+    @media (max-width: 600px) {
+        font-size: 1.8rem;
+    }
+}
