@@ -20,7 +20,6 @@ const DIFFICULTIES = {
 
 const gameBoard = document.getElementById('game-board');
 const moveCount = document.getElementById('move-count');
-const timerDisplay = document.getElementById('timer');
 const restartBtn = document.getElementById('restart-btn');
 const winMessage = document.getElementById('win-message');
 const gameOverMessage = document.getElementById('game-over-message');
@@ -117,11 +116,21 @@ function startTimer(seconds) {
 }
 
 function updateTimerDisplay() {
+    const timerBar = document.getElementById('timer-bar');
     if (currentDifficulty === 'chill') {
-        timerDisplay.textContent = '∞';
-    } else {
-        timerDisplay.textContent = `${timeLeft}s`;
+        timerBar.style.width = '100%';
+        timerBar.style.backgroundColor = '#48bb78';
+        return;
     }
+
+    const totalTime = DIFFICULTIES[currentDifficulty];
+    const percentage = (timeLeft / totalTime) * 100;
+    
+    timerBar.style.width = `${percentage}%`;
+    
+    // Calculate Hue: 120 (Green) -> 0 (Red)
+    const hue = (percentage / 100) * 120;
+    timerBar.style.backgroundColor = `hsl(${hue}, 70%, 50%)`;
 }
 
 function gameOver() {
@@ -150,7 +159,8 @@ function initGame(difficulty) {
         startTimer(DIFFICULTIES[difficulty]);
     } else {
         clearInterval(timerInterval);
-        updateTimerDisplay();
+        document.getElementById('timer-bar').style.width = '100%';
+        document.getElementById('timer-bar').style.backgroundColor = '#48bb78';
     }
 }
 

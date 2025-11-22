@@ -18,21 +18,37 @@
     gap: 10px;
 }
 
-.moves, .timer {
+.moves {
     font-size: 1.2rem;
     font-weight: bold;
     color: $text-color-dark;
 }
 
-#move-count, #timer {
+#move-count {
     color: $primary-color;
     font-size: 1.5rem;
-    min-width: 30px;
-    display: inline-block;
 }
 
-#timer {
-    color: #e53e3e; // Red color for timer
+.timer-container {
+    width: 200px;
+    height: 20px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    @media (max-width: 600px) {
+        width: 100%;
+        order: 3; // Move below buttons on mobile if needed
+    }
+}
+
+#timer-bar {
+    height: 100%;
+    width: 100%;
+    background-color: #48bb78; // Green
+    transition: width 1s linear, background-color 1s linear;
+    border-radius: 10px;
 }
 
 .game-board {
