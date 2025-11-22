@@ -10,12 +10,14 @@ let timerInterval;
 let timeLeft;
 let currentDifficulty;
 
+const MAX_TIME = 60;
+
 const DIFFICULTIES = {
     chill: null,
-    easy: 60,
-    medium: 45,
-    hard: 30,
-    wth: 15
+    easy: { startTime: 60, modifier: 2 },
+    medium: { startTime: 45, modifier: 3 },
+    hard: { startTime: 30, modifier: 4 },
+    wth: { startTime: 15, modifier: 5 }
 };
 
 const gameBoard = document.getElementById('game-board');
@@ -78,9 +80,17 @@ function checkMatch() {
     const symbol2 = card2.dataset.symbol;
     
     if (symbol1 === symbol2) {
+        // Match found
         card1.classList.add('matched');
         card2.classList.add('matched');
         matchedPairs++;
+        
+        // Add time bonus
+        if (currentDifficulty !== 'chill') {
+            timeLeft = Math.min(timeLeft + DIFFICULTIES[currentDifficulty].modifier, MAX_TIME);
+            updateTimerDisplay();
+        }
+
         flippedCards = [];
         isProcessing = false;
         
@@ -89,6 +99,17 @@ function checkMatch() {
             setTimeout(showWinMessage, 500);
         }
     } else {
+        // No match
+        if (currentDifficulty !== 'chill') {
+            timeLeft -= DIFFICULTIES[currentDifficulty].modifier;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                gameOver();
+                return; // Stop processing
+            }
+        }
+
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
@@ -123,8 +144,7 @@ function updateTimerDisplay() {
         return;
     }
 
-    const totalTime = DIFFICULTIES[currentDifficulty];
-    const percentage = (timeLeft / totalTime) * 100;
+    const percentage = (timeLeft / MAX_TIME) * 100;
     
     timerBar.style.width = `${percentage}%`;
     
@@ -156,7 +176,7 @@ function initGame(difficulty) {
     createCards();
 
     if (DIFFICULTIES[difficulty]) {
-        startTimer(DIFFICULTIES[difficulty]);
+        startTimer(DIFFICULTIES[difficulty].startTime);
     } else {
         clearInterval(timerInterval);
         document.getElementById('timer-bar').style.width = '100%';
