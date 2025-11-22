@@ -184,6 +184,14 @@ document.querySelectorAll('.play-again-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         winMessage.classList.add('hidden');
         gameOverMessage.classList.add('hidden');
+        initGame(currentDifficulty);
+    });
+});
+
+document.querySelectorAll('.main-menu-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        winMessage.classList.add('hidden');
+        gameOverMessage.classList.add('hidden');
         gameContainer.classList.add('hidden');
         welcomeScreen.classList.remove('hidden');
     });

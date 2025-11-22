@@ -24,19 +24,42 @@
         margin-bottom: 20px;
     }
 
-    .play-again-btn {
-        background: $primary-color;
-        color: white;
+    .modal-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .play-again-btn, .main-menu-btn {
         border: none;
         padding: 10px 25px;
         font-size: 1.1rem;
         border-radius: 5px;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
         font-weight: bold;
+    }
+
+    .play-again-btn {
+        background: $primary-color;
+        color: white;
 
         &:hover {
             background: $secondary-color;
+            transform: translateY(-2px);
+        }
+    }
+
+    .main-menu-btn {
+        background: transparent;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+
+        &:hover {
+            background: $primary-color;
+            color: white;
+            transform: translateY(-2px);
         }
     }
 }

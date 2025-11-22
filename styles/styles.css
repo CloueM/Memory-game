@@ -191,19 +191,38 @@ h1 {
   font-size: 1.3rem;
   margin-bottom: 20px;
 }
-.win-message .play-again-btn {
-  background: #667eea;
-  color: white;
+.win-message .modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.win-message .play-again-btn, .win-message .main-menu-btn {
   border: none;
   padding: 10px 25px;
   font-size: 1.1rem;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   font-weight: bold;
+}
+.win-message .play-again-btn {
+  background: #667eea;
+  color: white;
 }
 .win-message .play-again-btn:hover {
   background: #764ba2;
+  transform: translateY(-2px);
+}
+.win-message .main-menu-btn {
+  background: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+}
+.win-message .main-menu-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
 }
 
 #final-moves {
