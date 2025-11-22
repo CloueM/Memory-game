@@ -41,17 +41,25 @@ h1 {
   padding: 15px 25px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.moves {
+.moves, .timer {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
 }
 
-#move-count {
+#move-count, #timer {
   color: #667eea;
   font-size: 1.5rem;
+  min-width: 30px;
+  display: inline-block;
+}
+
+#timer {
+  color: #e53e3e;
 }
 
 .game-board {
@@ -164,6 +172,21 @@ h1 {
 .win-message p {
   color: #333;
   font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+.win-message .play-again-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+.win-message .play-again-btn:hover {
+  background: #764ba2;
 }
 
 #final-moves {
@@ -191,11 +214,11 @@ h1 {
 }
 .welcome-screen .content {
   background: white;
-  padding: 50px;
+  padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
+  max-width: 600px;
   width: 90%;
 }
 .welcome-screen .content h1 {
@@ -207,26 +230,70 @@ h1 {
   font-size: 1.2rem;
   color: #333;
   margin-bottom: 30px;
-  line-height: 1.5;
 }
-.welcome-screen .content #start-btn {
+.welcome-screen .content .difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+@media (min-width: 600px) {
+  .welcome-screen .content .difficulty-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .welcome-screen .content .difficulty-buttons .diff-btn:last-child {
+    grid-column: span 2;
+  }
+}
+.welcome-screen .content .diff-btn {
   background: #667eea;
   color: white;
   border: none;
-  padding: 15px 40px;
-  font-size: 1.2rem;
-  border-radius: 50px;
+  padding: 15px;
+  font-size: 1.1rem;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.2s, background 0.2s;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.welcome-screen .content #start-btn:hover {
+.welcome-screen .content .diff-btn:hover {
   background: #764ba2;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-.welcome-screen .content #start-btn:active {
+.welcome-screen .content .diff-btn:active {
   transform: translateY(0);
+}
+.welcome-screen .content .diff-btn[data-level=chill] {
+  background: #48bb78;
+}
+.welcome-screen .content .diff-btn[data-level=chill]:hover {
+  background: #38a169;
+}
+.welcome-screen .content .diff-btn[data-level=easy] {
+  background: #4299e1;
+}
+.welcome-screen .content .diff-btn[data-level=easy]:hover {
+  background: #3182ce;
+}
+.welcome-screen .content .diff-btn[data-level=medium] {
+  background: #ed8936;
+}
+.welcome-screen .content .diff-btn[data-level=medium]:hover {
+  background: #dd6b20;
+}
+.welcome-screen .content .diff-btn[data-level=hard] {
+  background: #e53e3e;
+}
+.welcome-screen .content .diff-btn[data-level=hard]:hover {
+  background: #c53030;
+}
+.welcome-screen .content .diff-btn[data-level=wth] {
+  background: #2d3748;
+}
+.welcome-screen .content .diff-btn[data-level=wth]:hover {
+  background: #1a202c;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -14,17 +14,25 @@
     padding: 15px 25px;
     border-radius: 10px;
     box-shadow: 0 4px 6px $shadow-light;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.moves {
+.moves, .timer {
     font-size: 1.2rem;
     font-weight: bold;
     color: $text-color-dark;
 }
 
-#move-count {
+#move-count, #timer {
     color: $primary-color;
     font-size: 1.5rem;
+    min-width: 30px;
+    display: inline-block;
+}
+
+#timer {
+    color: #e53e3e; // Red color for timer
 }
 
 .game-board {

@@ -6,12 +6,27 @@ let flippedCards = [];
 let matchedPairs = 0;
 let moves = 0;
 let isProcessing = false;
+let timerInterval;
+let timeLeft;
+let currentDifficulty;
+
+const DIFFICULTIES = {
+    chill: null,
+    easy: 60,
+    medium: 45,
+    hard: 30,
+    wth: 15
+};
 
 const gameBoard = document.getElementById('game-board');
 const moveCount = document.getElementById('move-count');
+const timerDisplay = document.getElementById('timer');
 const restartBtn = document.getElementById('restart-btn');
 const winMessage = document.getElementById('win-message');
+const gameOverMessage = document.getElementById('game-over-message');
 const finalMoves = document.getElementById('final-moves');
+const welcomeScreen = document.getElementById('welcome-screen');
+const gameContainer = document.getElementById('game-container');
 
 // Shuffle cards
 function shuffleArray(array) {
@@ -20,54 +35,39 @@ function shuffleArray(array) {
 
 // Create card elements
 function createCards() {
-    // Loop through every emoji in our shuffled list
+    gameBoard.innerHTML = '';
     for (let symbol of cards) {
-        console.log(symbol);
-        // 1. Create the main card box
         const card = document.createElement('div');
         card.classList.add('card');
-        
-        // 2. Store the secret emoji on the element (so we can check matches later)
         card.dataset.symbol = symbol;
-        
-        // 3. Create the HTML for the flip effect (Front is '?', Back is the emoji)
         card.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">?</div>
                 <div class="card-back">${symbol}</div>
             </div>
         `;
-        
-        // 4. Make it clickable
         card.addEventListener('click', handleCardClick);
-        
-        // 5. Add it to the game board
         gameBoard.appendChild(card);
     }
 }
 
 // Handle card click
 function handleCardClick(event) {
-    // Prevent clicking during processing or on already flipped/matched cards
     if (isProcessing) return;
     
     const card = event.currentTarget;
     
-    // Don't flip if already flipped or matched
     if (card.classList.contains('flipped') || card.classList.contains('matched')) {
         return;
     }
     
-    // Flip the card
     card.classList.add('flipped');
     flippedCards.push(card);
     
-    // Check if two cards are flipped
     if (flippedCards.length === 2) {
         isProcessing = true;
         moves++;
         moveCount.textContent = moves;
-        
         checkMatch();
     }
 }
@@ -79,20 +79,17 @@ function checkMatch() {
     const symbol2 = card2.dataset.symbol;
     
     if (symbol1 === symbol2) {
-        // Match found
         card1.classList.add('matched');
         card2.classList.add('matched');
         matchedPairs++;
-        
         flippedCards = [];
         isProcessing = false;
         
-        // Check if all pairs are matched
         if (matchedPairs === cardSymbols.length) {
+            clearInterval(timerInterval);
             setTimeout(showWinMessage, 500);
         }
     } else {
-        // When the card flipped is not matching, flip cards back after delay
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
@@ -102,24 +99,59 @@ function checkMatch() {
     }
 }
 
+// Timer Logic
+function startTimer(seconds) {
+    timeLeft = seconds;
+    updateTimerDisplay();
+    
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            gameOver();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    if (currentDifficulty === 'chill') {
+        timerDisplay.textContent = '∞';
+    } else {
+        timerDisplay.textContent = `${timeLeft}s`;
+    }
+}
+
+function gameOver() {
+    isProcessing = true; // Disable clicks
+    gameOverMessage.classList.remove('hidden');
+}
+
 // Initialize game
-function initGame() {
+function initGame(difficulty) {
+    currentDifficulty = difficulty;
     cards = [];
     flippedCards = [];
     matchedPairs = 0;
     moves = 0;
     isProcessing = false;
     
-    // Update UI
     moveCount.textContent = moves;
     winMessage.classList.add('hidden');
-    gameBoard.innerHTML = '';
+    gameOverMessage.classList.add('hidden');
     
-    // Create pairs of cards
     const cardPairs = [...cardSymbols, ...cardSymbols];
-    
     cards = shuffleArray(cardPairs);
     createCards();
+
+    if (DIFFICULTIES[difficulty]) {
+        startTimer(DIFFICULTIES[difficulty]);
+    } else {
+        clearInterval(timerInterval);
+        updateTimerDisplay();
+    }
 }
 
 // Show win message
@@ -128,21 +160,25 @@ function showWinMessage() {
     winMessage.classList.remove('hidden');
 }
 
-restartBtn.addEventListener('click', initGame);
+// Event Listeners
+document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const level = btn.dataset.level;
+        welcomeScreen.classList.add('hidden');
+        gameContainer.classList.remove('hidden');
+        initGame(level);
+    });
+});
 
-// Start the game when page loads
-// Start Game Logic
-const welcomeScreen = document.getElementById('welcome-screen');
-const startBtn = document.getElementById('start-btn');
-const gameContainer = document.getElementById('game-container');
+document.querySelectorAll('.play-again-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        winMessage.classList.add('hidden');
+        gameOverMessage.classList.add('hidden');
+        gameContainer.classList.add('hidden');
+        welcomeScreen.classList.remove('hidden');
+    });
+});
 
-function startGame() {
-    welcomeScreen.classList.add('hidden');
-    gameContainer.classList.remove('hidden');
-    initGame();
-}
-
-startBtn.addEventListener('click', startGame);
-
-// Remove auto-init
-// initGame();
+restartBtn.addEventListener('click', () => {
+    initGame(currentDifficulty);
+});
