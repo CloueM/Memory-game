@@ -234,15 +234,43 @@ function calculateScore() {
 
 // Show win message
 function showWinMessage() {
-    finalScore.textContent = calculateScore();
+    const totalMoves = rightMoves + wrongMoves;
+    const accuracy = totalMoves === 0 ? 0 : (rightMoves / totalMoves) * 100;
+    
+    let timeFactor = 100;
+    if (currentDifficulty !== 'chill') {
+        timeFactor = (timeLeft / MAX_TIME) * 100;
+    }
+    
+    const score = calculateScore();
+    finalScore.textContent = score;
     
     document.getElementById('final-right').textContent = rightMoves;
     document.getElementById('final-wrong').textContent = wrongMoves;
     document.getElementById('final-time').textContent = currentDifficulty === 'chill' ? '∞' : timeLeft;
     document.getElementById('final-multiplier').textContent = `${DIFFICULTIES[currentDifficulty].multiplier}x`;
     
+    const formulaText = `
+        Accuracy: (${rightMoves}/${totalMoves}) × 100 × 0.6 = ${Math.round(accuracy * 0.6)}
+        Time: (${currentDifficulty === 'chill' ? '∞' : timeLeft}/${MAX_TIME}) × 100 × 0.4 = ${Math.round(timeFactor * 0.4)}
+        Total: (${Math.round(accuracy * 0.6)} + ${Math.round(timeFactor * 0.4)}) × ${DIFFICULTIES[currentDifficulty].multiplier}x = ${score}
+    `;
+    document.getElementById('score-formula').innerText = formulaText; // Use innerText for newlines
+    
     winMessage.classList.remove('hidden');
 }
+
+document.getElementById('score-explain-btn').addEventListener('click', () => {
+    const explanation = document.getElementById('score-explanation');
+    const btn = document.getElementById('score-explain-btn');
+    
+    explanation.classList.toggle('hidden');
+    if (explanation.classList.contains('hidden')) {
+        btn.textContent = 'How is this calculated? ▼';
+    } else {
+        btn.textContent = 'Hide explanation ▲';
+    }
+});
 
 // Event Listeners
 document.querySelectorAll('.diff-btn').forEach(btn => {
