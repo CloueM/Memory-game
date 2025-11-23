@@ -1,22 +1,41 @@
 @use 'variables' as *;
 
-#restart-btn {
-    background: $primary-color;
-    color: $text-color-light;
-    border: none;
+#restart-btn, #main-menu-game-btn {
     padding: 10px 20px;
     font-size: 1rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
-    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Added from original #restart-btn */
 
     &:hover {
-        background: $secondary-color;
-        transform: translateY(-2px);
+        background-color: $secondary-color;
+        transform: translateY(-2px); /* Added from original #restart-btn */
     }
 
-    &:active {
+    &:active { /* Added from original #restart-btn */
         transform: translateY(0);
     }
+}
+
+#main-menu-game-btn {
+    background-color: transparent;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+    }
+}
+
+.game-buttons {
+    display: flex;
+    gap: 10px;
 }

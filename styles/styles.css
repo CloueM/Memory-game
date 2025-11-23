@@ -132,23 +132,41 @@ h1 {
   display: none;
 }
 
-#restart-btn {
-  background: #667eea;
-  color: white;
-  border: none;
+#restart-btn, #main-menu-game-btn {
   padding: 10px 20px;
   font-size: 1rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-weight: bold; /* Added from original #restart-btn */
 }
-#restart-btn:hover {
-  background: #764ba2;
-  transform: translateY(-2px);
+#restart-btn:hover, #main-menu-game-btn:hover {
+  background-color: #764ba2;
+  transform: translateY(-2px); /* Added from original #restart-btn */
 }
-#restart-btn:active {
+#restart-btn:active, #main-menu-game-btn:active { /* Added from original #restart-btn */
   transform: translateY(0);
+}
+
+#main-menu-game-btn {
+  background-color: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#main-menu-game-btn:hover {
+  background-color: #667eea;
+  color: white;
+}
+
+.game-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .card {

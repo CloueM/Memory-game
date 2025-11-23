@@ -302,3 +302,9 @@ document.querySelectorAll('.main-menu-btn').forEach(btn => {
 restartBtn.addEventListener('click', () => {
     initGame(currentDifficulty);
 });
+
+document.getElementById('main-menu-game-btn').addEventListener('click', () => {
+    clearInterval(timerInterval);
+    gameContainer.classList.add('hidden');
+    welcomeScreen.classList.remove('hidden');
+});
