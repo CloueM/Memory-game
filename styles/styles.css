@@ -33,6 +33,15 @@ h1 {
   width: 100%;
   position: relative;
 }
+.container .game-header {
+  font-size: 3rem;
+  color: #FF6B6B;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 0px #FFE66D;
+  letter-spacing: 2px;
+  animation: float 3s ease-in-out infinite;
+  text-align: center;
+}
 
 .game-info {
   display: flex;

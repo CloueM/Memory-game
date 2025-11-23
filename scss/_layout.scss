@@ -6,6 +6,16 @@
     max-width: 800px;
     width: 100%;
     position: relative;
+
+    .game-header {
+        font-size: 3rem;
+        color: $primary-color;
+        margin-bottom: 20px;
+        text-shadow: 3px 3px 0px $accent-color;
+        letter-spacing: 2px;
+        animation: float 3s ease-in-out infinite;
+        text-align: center;
+    }
 }
 
 .game-info {
