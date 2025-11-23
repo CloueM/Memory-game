@@ -60,9 +60,12 @@
             }
 
             .difficulty-buttons {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                display: flex;
+                flex-direction: column;
                 gap: 15px;
+                max-width: 400px; // Limit width for better look
+                margin: 0 auto; // Center it
+                width: 100%;
             }
         }
 
@@ -75,9 +78,10 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
-            flex-direction: column;
+            flex-direction: row; // Horizontal layout
             align-items: center;
-            gap: 5px;
+            justify-content: center; // Center content
+            gap: 15px; // More gap between icon and text
 
             .btn-icon {
                 font-size: 2rem;

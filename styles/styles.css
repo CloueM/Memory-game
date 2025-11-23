@@ -447,9 +447,12 @@ h1 {
   letter-spacing: 1px;
 }
 .welcome-screen .content .level-select-container .difficulty-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
 }
 .welcome-screen .content .diff-btn {
   background: white;
@@ -460,9 +463,10 @@ h1 {
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 15px;
 }
 .welcome-screen .content .diff-btn .btn-icon {
   font-size: 2rem;
