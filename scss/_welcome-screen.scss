@@ -6,12 +6,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: linear-gradient(135deg, $primary-color, $secondary-color); // Fun gradient
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000;
     transition: opacity 0.5s ease;
+    font-family: $font-stack;
 
     &.hidden {
         opacity: 0;
@@ -19,70 +20,101 @@
     }
 
     .content {
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 50px;
+        border-radius: 30px;
         text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        max-width: 600px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        max-width: 700px;
         width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        backdrop-filter: blur(10px);
+        border: 4px solid white;
 
-        h1 {
-            color: $primary-color;
-            margin-bottom: 20px;
-            text-shadow: none;
+        .hero-section {
+            .game-title {
+                font-size: 4rem;
+                color: $primary-color;
+                margin-bottom: 10px;
+                text-shadow: 3px 3px 0px $accent-color;
+                letter-spacing: 2px;
+                animation: float 3s ease-in-out infinite;
+            }
+
+            .game-subtitle {
+                font-size: 1.5rem;
+                color: $text-color-dark;
+                font-weight: 600;
+            }
         }
 
-        p {
-            font-size: 1.2rem;
-            color: $text-color-dark;
-            margin-bottom: 30px;
-        }
+        .level-select-container {
+            h3 {
+                font-size: 1.2rem;
+                color: #888;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
 
-        .difficulty-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            
-            @media (min-width: 600px) {
+            .difficulty-buttons {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                
-                // Make the last item span full width if odd number
-                .diff-btn:last-child {
-                    grid-column: span 2;
-                }
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
             }
         }
 
         .diff-btn {
-            background: $primary-color;
-            color: white;
-            border: none;
+            background: white;
+            color: $text-color-dark;
+            border: 2px solid #eee;
             padding: 15px;
-            font-size: 1.1rem;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px $shadow-light;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+
+            .btn-icon {
+                font-size: 2rem;
+            }
+
+            .btn-text {
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
 
             &:hover {
-                background: $secondary-color;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px $shadow-medium;
+                transform: translateY(-5px) scale(1.05);
+                border-color: $primary-color;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                
+                .btn-text {
+                    color: $primary-color;
+                }
             }
 
             &:active {
-                transform: translateY(0);
+                transform: translateY(0) scale(0.98);
             }
+        }
 
-            // Special styles for specific difficulties
-            &[data-level="chill"] { background: #48bb78; &:hover { background: #38a169; } }
-            &[data-level="easy"] { background: #4299e1; &:hover { background: #3182ce; } }
-            &[data-level="medium"] { background: #ed8936; &:hover { background: #dd6b20; } }
-            &[data-level="hard"] { background: #e53e3e; &:hover { background: #c53030; } }
-            &[data-level="wth"] { background: #2d3748; &:hover { background: #1a202c; } }
+        .site-footer {
+            margin-top: 20px;
+            p {
+                font-size: 0.9rem;
+                color: #aaa;
+            }
         }
     }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
