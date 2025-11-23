@@ -90,6 +90,17 @@
             .btn-text {
                 font-weight: bold;
                 font-size: 1.1rem;
+                flex: 1; // Allow text to take space
+                text-align: left; // Align text to left
+            }
+
+            .btn-time {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                font-weight: normal;
+                background: rgba(0,0,0,0.05);
+                padding: 4px 8px;
+                border-radius: 10px;
             }
 
             &:hover {
