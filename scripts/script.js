@@ -34,6 +34,9 @@ const finalScore = document.getElementById('final-score');
 const welcomeScreen = document.getElementById('welcome-screen');
 const gameContainer = document.getElementById('game-container');
 
+const countdownOverlay = document.getElementById('countdown-overlay');
+const countdownNumber = document.querySelector('.countdown-number');
+
 // Shuffle cards
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
@@ -193,7 +196,7 @@ function initGame(difficulty) {
     moves = 0;
     rightMoves = 0;
     wrongMoves = 0;
-    isProcessing = false;
+    isProcessing = true; // Disable clicks initially (until countdown finishes)
     
     moveCount.textContent = moves;
     rightCount.textContent = 0;
@@ -205,13 +208,56 @@ function initGame(difficulty) {
     cards = shuffleArray(cardPairs);
     createCards();
 
+    // Reset timer display but don't start it yet
+    clearInterval(timerInterval);
     if (DIFFICULTIES[difficulty].startTime) {
-        startTimer(DIFFICULTIES[difficulty].startTime);
+        timeLeft = DIFFICULTIES[difficulty].startTime;
+        updateTimerDisplay();
     } else {
-        clearInterval(timerInterval);
         document.getElementById('timer-bar').style.width = '100%';
         document.getElementById('timer-bar').style.backgroundColor = '#48bb78';
     }
+}
+
+function startCountdown(onComplete) {
+    countdownOverlay.classList.remove('hidden');
+    countdownOverlay.style.opacity = '1'; // Ensure opacity is 1
+    let count = 3;
+    countdownNumber.textContent = count;
+    
+    // Reset animation
+    countdownNumber.style.animation = 'none';
+    countdownNumber.offsetHeight; /* trigger reflow */
+    countdownNumber.style.animation = 'popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+
+    const interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countdownNumber.textContent = count;
+            // Reset animation
+            countdownNumber.style.animation = 'none';
+            countdownNumber.offsetHeight; /* trigger reflow */
+            countdownNumber.style.animation = 'popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+        } else if (count === 0) {
+            countdownNumber.textContent = 'Start!';
+            // Reset animation
+            countdownNumber.style.animation = 'none';
+            countdownNumber.offsetHeight; /* trigger reflow */
+            countdownNumber.style.animation = 'popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+        } else {
+            clearInterval(interval);
+            
+            // Fade out
+            countdownOverlay.style.opacity = '0';
+            
+            // Wait for transition to finish before hiding and starting game
+            setTimeout(() => {
+                countdownOverlay.classList.add('hidden');
+                isProcessing = false; // Enable clicks
+                if (onComplete) onComplete();
+            }, 500); // 500ms matches CSS transition duration
+        }
+    }, 1000);
 }
 
 function calculateScore() {
@@ -279,6 +325,11 @@ document.querySelectorAll('.diff-btn').forEach(btn => {
         welcomeScreen.classList.add('hidden');
         gameContainer.classList.remove('hidden');
         initGame(level);
+        startCountdown(() => {
+            if (DIFFICULTIES[level].startTime) {
+                startTimer(DIFFICULTIES[level].startTime);
+            }
+        });
     });
 });
 
@@ -287,6 +338,11 @@ document.querySelectorAll('.play-again-btn').forEach(btn => {
         winMessage.classList.add('hidden');
         gameOverMessage.classList.add('hidden');
         initGame(currentDifficulty);
+        startCountdown(() => {
+            if (DIFFICULTIES[currentDifficulty].startTime) {
+                startTimer(DIFFICULTIES[currentDifficulty].startTime);
+            }
+        });
     });
 });
 
@@ -301,6 +357,11 @@ document.querySelectorAll('.main-menu-btn').forEach(btn => {
 
 restartBtn.addEventListener('click', () => {
     initGame(currentDifficulty);
+    startCountdown(() => {
+        if (DIFFICULTIES[currentDifficulty].startTime) {
+            startTimer(DIFFICULTIES[currentDifficulty].startTime);
+        }
+    });
 });
 
 document.getElementById('main-menu-game-btn').addEventListener('click', () => {
