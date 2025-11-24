@@ -166,6 +166,7 @@ function checkMatch() {
     
     if (symbol1 === symbol2) {
         // Match found
+        playMatchSfx();
         card1.classList.add('matched');
         card2.classList.add('matched');
         matchedPairs++;
@@ -188,6 +189,7 @@ function checkMatch() {
         }
     } else {
         // No match
+        playNotMatchSfx();
         wrongMoves++;
         wrongCount.textContent = wrongMoves;
 
@@ -319,6 +321,23 @@ function playCardFlipSfx() {
     if (!isMuted) {
         cardFlipSfx.currentTime = 0;
         cardFlipSfx.play().catch(() => {});
+    }
+}
+
+const matchSfx = document.getElementById('match-sfx');
+const notMatchSfx = document.getElementById('not-match-sfx');
+
+function playMatchSfx() {
+    if (!isMuted) {
+        matchSfx.currentTime = 0;
+        matchSfx.play().catch(() => {});
+    }
+}
+
+function playNotMatchSfx() {
+    if (!isMuted) {
+        notMatchSfx.currentTime = 0;
+        notMatchSfx.play().catch(() => {});
     }
 }
 
