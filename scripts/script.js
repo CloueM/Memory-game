@@ -39,6 +39,8 @@ const countdownNumber = document.querySelector('.countdown-number');
 
 // Audio Elements
 const bgMusic = document.getElementById('bg-music');
+const hoverSfx = document.getElementById('hover-sfx');
+const selectSfx = document.getElementById('select-sfx');
 const welcomeMuteBtn = document.getElementById('welcome-mute-btn');
 const gameMuteBtn = document.getElementById('game-mute-btn');
 let isMuted = false;
@@ -64,6 +66,20 @@ function updateMuteIcons() {
 function playMusic() {
     if (!isMuted) {
         bgMusic.play().catch(e => console.log("Audio play failed (likely browser policy):", e));
+    }
+}
+
+function playHoverSfx() {
+    if (!isMuted) {
+        hoverSfx.currentTime = 0;
+        hoverSfx.play().catch(() => {}); // Ignore errors (rapid hovering)
+    }
+}
+
+function playSelectSfx() {
+    if (!isMuted) {
+        selectSfx.currentTime = 0;
+        selectSfx.play().catch(() => {});
     }
 }
 
@@ -351,6 +367,12 @@ document.getElementById('score-explain-btn').addEventListener('click', () => {
 // Event Listeners
 welcomeMuteBtn.addEventListener('click', toggleMute);
 gameMuteBtn.addEventListener('click', toggleMute);
+
+// Attach SFX to all buttons
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('mouseenter', playHoverSfx);
+    btn.addEventListener('click', playSelectSfx);
+});
 
 document.querySelectorAll('.diff-btn').forEach(btn => {
     btn.addEventListener('click', () => {
