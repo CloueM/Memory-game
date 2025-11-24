@@ -52,6 +52,14 @@ function toggleMute() {
     isMuted = !isMuted;
     bgMusic.muted = isMuted;
     bgForest.muted = isMuted;
+    
+    if (isMuted) {
+        stopTickingSfx();
+    } else if (timeLeft <= 10 && !isProcessing && !winMessage.classList.contains('hidden') === false && !gameOverMessage.classList.contains('hidden') === false) {
+        // Resume ticking if muted while low time and game is active
+        // Simplified check: just let the timer interval handle it
+    }
+
     updateMuteIcons();
     
     // If unmuting and paused, try to play
@@ -185,6 +193,7 @@ function checkMatch() {
         
         if (matchedPairs === cardSymbols.length) {
             clearInterval(timerInterval);
+            stopTickingSfx();
             setTimeout(showWinMessage, 500);
         }
     } else {
@@ -199,6 +208,7 @@ function checkMatch() {
             triggerGlow('red');
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
+                stopTickingSfx();
                 gameOver();
                 return; // Stop processing
             }
@@ -223,8 +233,15 @@ function startTimer(seconds) {
         timeLeft--;
         updateTimerDisplay();
         
+        if (timeLeft <= 10 && timeLeft > 0) {
+            playTickingSfx();
+        } else {
+            stopTickingSfx();
+        }
+        
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
+            stopTickingSfx();
             gameOver();
         }
     }, 1000);
@@ -329,6 +346,7 @@ const matchSfx = document.getElementById('match-sfx');
 const notMatchSfx = document.getElementById('not-match-sfx');
 const gameOverSfx = document.getElementById('game-over-sfx');
 const gameWonSfx = document.getElementById('game-won-sfx');
+const clockTickingSfx = document.getElementById('clock-ticking-sfx');
 
 function playMatchSfx() {
     if (!isMuted) {
@@ -356,6 +374,17 @@ function playGameWonSfx() {
         gameWonSfx.currentTime = 0;
         gameWonSfx.play().catch(() => {});
     }
+}
+
+function playTickingSfx() {
+    if (!isMuted && clockTickingSfx.paused) {
+        clockTickingSfx.play().catch(() => {});
+    }
+}
+
+function stopTickingSfx() {
+    clockTickingSfx.pause();
+    clockTickingSfx.currentTime = 0;
 }
 
 function startCountdown(onComplete) {
@@ -518,6 +547,7 @@ restartBtn.addEventListener('click', () => {
 
 document.getElementById('main-menu-game-btn').addEventListener('click', () => {
     clearInterval(timerInterval);
+    stopTickingSfx();
     gameContainer.classList.add('hidden');
     welcomeScreen.classList.remove('hidden');
 });
