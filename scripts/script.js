@@ -65,7 +65,34 @@ function updateMuteIcons() {
 
 function playMusic() {
     if (!isMuted) {
-        bgMusic.play().catch(e => console.log("Audio play failed (likely browser policy):", e));
+        bgMusic.play().catch(e => {
+            console.log("Audio play failed (likely browser policy):", e);
+        });
+    }
+}
+
+// Attempt to play music immediately or on first interaction
+function startMusic() {
+    if (!isMuted && bgMusic.paused) {
+        bgMusic.play().then(() => {
+            // Autoplay started successfully
+            document.removeEventListener('click', startMusic);
+            document.removeEventListener('keydown', startMusic);
+        }).catch(() => {
+            // Autoplay failed, wait for interaction
+            document.addEventListener('click', startMusic, { once: true });
+            document.addEventListener('keydown', startMusic, { once: true });
+        });
+    }
+}
+
+// Try to start music immediately
+startMusic();
+
+function playHoverSfx() {
+    if (!isMuted) {
+        hoverSfx.currentTime = 0;
+        hoverSfx.play().catch(() => {}); // Ignore errors (rapid hovering)
     }
 }
 
