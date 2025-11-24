@@ -263,6 +263,7 @@ function updateTimerDisplay() {
 
 function gameOver() {
     isProcessing = true; // Disable clicks
+    playGameOverSfx();
     gameOverMessage.classList.remove('hidden');
 }
 
@@ -326,6 +327,8 @@ function playCardFlipSfx() {
 
 const matchSfx = document.getElementById('match-sfx');
 const notMatchSfx = document.getElementById('not-match-sfx');
+const gameOverSfx = document.getElementById('game-over-sfx');
+const gameWonSfx = document.getElementById('game-won-sfx');
 
 function playMatchSfx() {
     if (!isMuted) {
@@ -338,6 +341,20 @@ function playNotMatchSfx() {
     if (!isMuted) {
         notMatchSfx.currentTime = 0;
         notMatchSfx.play().catch(() => {});
+    }
+}
+
+function playGameOverSfx() {
+    if (!isMuted) {
+        gameOverSfx.currentTime = 0;
+        gameOverSfx.play().catch(() => {});
+    }
+}
+
+function playGameWonSfx() {
+    if (!isMuted) {
+        gameWonSfx.currentTime = 0;
+        gameWonSfx.play().catch(() => {});
     }
 }
 
@@ -404,6 +421,7 @@ function calculateScore() {
 
 // Show win message
 function showWinMessage() {
+    playGameWonSfx();
     const totalMoves = rightMoves + wrongMoves;
     const accuracy = totalMoves === 0 ? 0 : (rightMoves / totalMoves) * 100;
     
