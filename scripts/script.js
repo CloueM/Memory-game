@@ -39,6 +39,8 @@ const countdownNumber = document.querySelector('.countdown-number');
 
 // Audio Elements
 const bgMusic = document.getElementById('bg-music');
+bgMusic.volume = 0.2;
+const bgForest = document.getElementById('bg-forest');
 const hoverSfx = document.getElementById('hover-sfx');
 const selectSfx = document.getElementById('select-sfx');
 const welcomeMuteBtn = document.getElementById('welcome-mute-btn');
@@ -49,6 +51,7 @@ let isMuted = false;
 function toggleMute() {
     isMuted = !isMuted;
     bgMusic.muted = isMuted;
+    bgForest.muted = isMuted;
     updateMuteIcons();
     
     // If unmuting and paused, try to play
@@ -65,16 +68,15 @@ function updateMuteIcons() {
 
 function playMusic() {
     if (!isMuted) {
-        bgMusic.play().catch(e => {
-            console.log("Audio play failed (likely browser policy):", e);
-        });
+        const p1 = bgMusic.play().catch(e => console.log("Bg music play failed:", e));
+        const p2 = bgForest.play().catch(e => console.log("Forest sfx play failed:", e));
     }
 }
 
 // Attempt to play music immediately or on first interaction
 function startMusic() {
     if (!isMuted && bgMusic.paused) {
-        bgMusic.play().then(() => {
+        Promise.all([bgMusic.play(), bgForest.play()]).then(() => {
             // Autoplay started successfully
             document.removeEventListener('click', startMusic);
             document.removeEventListener('keydown', startMusic);
