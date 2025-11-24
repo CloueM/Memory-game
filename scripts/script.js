@@ -131,6 +131,7 @@ function createCards() {
             </div>
         `;
         card.addEventListener('click', handleCardClick);
+        card.addEventListener('mouseenter', playCardHoverSfx);
         gameBoard.appendChild(card);
     }
 }
@@ -146,6 +147,7 @@ function handleCardClick(event) {
     }
     
     card.classList.add('flipped');
+    playCardFlipSfx();
     flippedCards.push(card);
     
     if (flippedCards.length === 2) {
@@ -295,11 +297,27 @@ function initGame(difficulty) {
 }
 
 const countdownSfx = document.getElementById('countdown-sfx');
+const cardHoverSfx = document.getElementById('card-hover-sfx');
+const cardFlipSfx = document.getElementById('card-flip-sfx');
 
 function playCountdownSfx() {
     if (!isMuted) {
         countdownSfx.currentTime = 0;
         countdownSfx.play().catch(() => {});
+    }
+}
+
+function playCardHoverSfx() {
+    if (!isMuted) {
+        cardHoverSfx.currentTime = 0;
+        cardHoverSfx.play().catch(() => {});
+    }
+}
+
+function playCardFlipSfx() {
+    if (!isMuted) {
+        cardFlipSfx.currentTime = 0;
+        cardFlipSfx.play().catch(() => {});
     }
 }
 
