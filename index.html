@@ -153,12 +153,167 @@
             <h2 style="color: #e53e3e;">Game Over!</h2>
             <p>Time ran out!</p>
             <div class="modal-buttons">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MatchaMoji🍵" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>MatchaMoji 🍵</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="/assets/sounds-efx/background-music-lofionly.mp3" type="audio/mp3">
+    </audio>
+    <audio id="bg-forest" loop>
+        <source src="/assets/sounds-efx/background-forest-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="hover-sfx">
+        <source src="/assets/sounds-efx/btn-hover-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="select-sfx">
+        <source src="/assets/sounds-efx/btn-select-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="countdown-sfx">
+        <source src="/assets/sounds-efx/count-down-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="card-hover-sfx">
+        <source src="/assets/sounds-efx/card-hover-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="card-flip-sfx">
+        <source src="/assets/sounds-efx/card-flip-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="match-sfx">
+        <source src="/assets/sounds-efx/card-match-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="not-match-sfx">
+        <source src="/assets/sounds-efx/card-not-match-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="game-over-sfx">
+        <source src="/assets/sounds-efx/game-over-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="game-won-sfx">
+        <source src="/assets/sounds-efx/game-won-sfx.mp3" type="audio/mp3">
+    </audio>
+    <audio id="clock-ticking-sfx" loop>
+        <source src="/assets/sounds-efx/clock-ticking-sfx.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="content">
+            <div class="hero-section">
+                <button id="welcome-mute-btn" class="mute-btn" aria-label="Toggle Mute">🔊</button>
+                <h1 class="game-title">Matcha Moji 🍵</h1>
+                <p class="game-subtitle">Flip, Match, and Win!</p>
+            </div>
+            
+            <div class="level-select-container">
+                <h3>Select Your Challenge</h3>
+                <div class="difficulty-buttons">
+                    <button class="diff-btn" data-level="chill">
+                        <span class="btn-icon">☕</span>
+                        <span class="btn-text">Chill</span>
+                        <span class="btn-time">No Timer</span>
+                    </button>
+                    <button class="diff-btn" data-level="easy">
+                        <span class="btn-icon">🙂</span>
+                        <span class="btn-text">Easy</span>
+                        <span class="btn-time">60s</span>
+                    </button>
+                    <button class="diff-btn" data-level="medium">
+                        <span class="btn-icon">🤔</span>
+                        <span class="btn-text">Medium</span>
+                        <span class="btn-time">45s</span>
+                    </button>
+                    <button class="diff-btn" data-level="hard">
+                        <span class="btn-icon">🤯</span>
+                        <span class="btn-text">Hard</span>
+                        <span class="btn-time">30s</span>
+                    </button>
+                    <button class="diff-btn" data-level="wth">
+                        <span class="btn-icon">💀</span>
+                        <span class="btn-text">WTH</span>
+                        <span class="btn-time">15s</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="site-footer">
+                <p>©2025 MojiFlip</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container" class="container hidden">
+        <div class="game-header-wrapper">
+            <h1 class="game-header">Matcha Moji 🍵</h1>
+            <button id="game-mute-btn" class="mute-btn" aria-label="Toggle Mute">🔊</button>
+        </div>
+        
+        <div class="game-info">
+            <div class="stats">
+                <div class="stat-item">Moves: <span id="move-count">0</span></div>
+                <div class="stat-item right">✅ <span id="right-count">0</span></div>
+                <div class="stat-item wrong">❌ <span id="wrong-count">0</span></div>
+            </div>
+            <div class="timer-container">
+                <div id="timer-bar"></div>
+            </div>
+            <div class="game-buttons">
+                <button id="restart-btn">Restart Game</button>
+                <button id="main-menu-game-btn">🏠 Main Menu</button>
+            </div>
+        </div>
+
+        <div id="game-board" class="game-board">
+        </div>
+
+        <div id="countdown-overlay" class="countdown-overlay hidden">
+            <div class="countdown-number">3</div>
+        </div>
+
+        <div id="win-message" class="win-message hidden">
+            <h2>You Win!</h2>
+            <p>Score: <span id="final-score">0</span></p>
+            
+            <div class="score-details">
+                <div class="detail-item">✅ Right: <span id="final-right">0</span></div>
+                <div class="detail-item">❌ Wrong: <span id="final-wrong">0</span></div>
+                <div class="detail-item">⏱️ Time: <span id="final-time">0</span>s</div>
+                <div class="detail-item">⚡ Multiplier: <span id="final-multiplier">1x</span></div>
+            </div>
+            
+            <button id="score-explain-btn" class="text-btn">How is this calculated? ▼</button>
+            <div id="score-explanation" class="score-explanation hidden">
+                <p><strong>Accuracy (60%):</strong> Based on your Right Moves vs Total Moves.</p>
+                <p><strong>Speed (40%):</strong> Based on how much time you had left.</p>
+                <p><strong>Multiplier:</strong> Harder difficulties boost your final score!</p>
+                <div id="score-formula" class="score-formula"></div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="play-again-btn">Play Again</button>
+                <button class="main-menu-btn">Main Menu</button>
+            </div>
+        </div>
+
+        <div id="game-over-message" class="win-message hidden">
+            <h2 style="color: #e53e3e;">Game Over!</h2>
+            <p>Time ran out!</p>
+            <div class="modal-buttons">
                 <button class="play-again-btn">Try Again</button>
                 <button class="main-menu-btn">Main Menu</button>
             </div>
         </div>
     </div>
 
-    <script src="/scripts/script.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
