@@ -294,11 +294,21 @@ function initGame(difficulty) {
     }
 }
 
+const countdownSfx = document.getElementById('countdown-sfx');
+
+function playCountdownSfx() {
+    if (!isMuted) {
+        countdownSfx.currentTime = 0;
+        countdownSfx.play().catch(() => {});
+    }
+}
+
 function startCountdown(onComplete) {
     countdownOverlay.classList.remove('hidden');
     countdownOverlay.style.opacity = '1'; // Ensure opacity is 1
-    let count = 3;
+    let count = 5;
     countdownNumber.textContent = count;
+    playCountdownSfx(); // Play for initial number
     
     // Reset animation
     countdownNumber.style.animation = 'none';
@@ -309,6 +319,7 @@ function startCountdown(onComplete) {
         count--;
         if (count > 0) {
             countdownNumber.textContent = count;
+            playCountdownSfx(); // Play for subsequent numbers
             // Reset animation
             countdownNumber.style.animation = 'none';
             countdownNumber.offsetHeight; /* trigger reflow */
