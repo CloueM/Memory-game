@@ -7,17 +7,22 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="MojiFlip" />
+    <meta name="apple-mobile-web-app-title" content="MatchaMoji🍵" />
     <link rel="manifest" href="/site.webmanifest" />
-    <title>MojiFlip</title>
+    <title>MatchaMoji 🍵</title>
     <link rel="stylesheet" href="/styles/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <audio id="bg-music" loop>
+        <source src="/assets/sounds-efx/background-music-lofionly.mp3" type="audio/mp3">
+    </audio>
+
     <div id="welcome-screen" class="welcome-screen">
         <div class="content">
             <div class="hero-section">
-                <h1 class="game-title">MojiFlip 🍃</h1>
+                <button id="welcome-mute-btn" class="mute-btn" aria-label="Toggle Mute">🔊</button>
+                <h1 class="game-title">Matcha Moji 🍵</h1>
                 <p class="game-subtitle">Flip, Match, and Win!</p>
             </div>
             
@@ -59,7 +64,10 @@
     </div>
 
     <div id="game-container" class="container hidden">
-        <h1 class="game-header">MojiFlip 🍃</h1>
+        <div class="game-header-wrapper">
+            <h1 class="game-header">Matcha Moji 🍵</h1>
+            <button id="game-mute-btn" class="mute-btn" aria-label="Toggle Mute">🔊</button>
+        </div>
         
         <div class="game-info">
             <div class="stats">

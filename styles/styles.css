@@ -228,6 +228,45 @@ h1 {
   gap: 10px;
 }
 
+.mute-btn {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+.mute-btn:hover {
+  transform: scale(1.1);
+}
+.mute-btn:active {
+  transform: scale(0.95);
+}
+
+#welcome-mute-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.game-header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.game-header-wrapper .game-header {
+  margin: 0;
+}
+.game-header-wrapper #game-mute-btn {
+  position: absolute;
+  right: 0;
+  font-size: 1.5rem;
+}
+
 .card {
   aspect-ratio: 1;
   position: relative;

@@ -37,6 +37,36 @@ const gameContainer = document.getElementById('game-container');
 const countdownOverlay = document.getElementById('countdown-overlay');
 const countdownNumber = document.querySelector('.countdown-number');
 
+// Audio Elements
+const bgMusic = document.getElementById('bg-music');
+const welcomeMuteBtn = document.getElementById('welcome-mute-btn');
+const gameMuteBtn = document.getElementById('game-mute-btn');
+let isMuted = false;
+
+// Audio Control Functions
+function toggleMute() {
+    isMuted = !isMuted;
+    bgMusic.muted = isMuted;
+    updateMuteIcons();
+    
+    // If unmuting and paused, try to play
+    if (!isMuted && bgMusic.paused) {
+        playMusic();
+    }
+}
+
+function updateMuteIcons() {
+    const icon = isMuted ? '🔇' : '🔊';
+    welcomeMuteBtn.textContent = icon;
+    gameMuteBtn.textContent = icon;
+}
+
+function playMusic() {
+    if (!isMuted) {
+        bgMusic.play().catch(e => console.log("Audio play failed (likely browser policy):", e));
+    }
+}
+
 // Shuffle cards
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
@@ -319,11 +349,15 @@ document.getElementById('score-explain-btn').addEventListener('click', () => {
 });
 
 // Event Listeners
+welcomeMuteBtn.addEventListener('click', toggleMute);
+gameMuteBtn.addEventListener('click', toggleMute);
+
 document.querySelectorAll('.diff-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const level = btn.dataset.level;
         welcomeScreen.classList.add('hidden');
         gameContainer.classList.remove('hidden');
+        playMusic(); // Try to start music on interaction
         initGame(level);
         startCountdown(() => {
             if (DIFFICULTIES[level].startTime) {
