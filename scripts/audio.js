@@ -19,6 +19,16 @@ const audioElements = {
 audioElements.bgMusic.volume = 0.2;
 
 export function toggleMute() {
+    // Special handling for Autoplay Blocked state:
+    // If the game is NOT muted, but the music is paused, it means the browser blocked autoplay.
+    // In this case, if the user clicks the mute button (which shows 'Sound On'),
+    // we should interpret this as an interaction to START the music, not to mute it.
+    if (!gameState.isMuted && audioElements.bgMusic.paused) {
+        playMusic();
+        updateMuteIcons(); // Ensure icons are correct (should still be unmuted)
+        return;
+    }
+
     gameState.isMuted = !gameState.isMuted;
     audioElements.bgMusic.muted = gameState.isMuted;
     audioElements.bgForest.muted = gameState.isMuted;
@@ -51,13 +61,28 @@ export function playMusic() {
 
 export function startMusic() {
     if (!gameState.isMuted && audioElements.bgMusic.paused) {
-        Promise.all([audioElements.bgMusic.play(), audioElements.bgForest.play()]).then(() => {
-            document.removeEventListener('click', startMusic);
-            document.removeEventListener('keydown', startMusic);
-        }).catch(() => {
-            document.addEventListener('click', startMusic, { once: true });
-            document.addEventListener('keydown', startMusic, { once: true });
-        });
+        // Try to play background music
+        const musicPromise = audioElements.bgMusic.play();
+        
+        // Try to play forest SFX (independently)
+        audioElements.bgForest.play().catch(e => console.warn("Forest SFX failed:", e));
+
+        if (musicPromise !== undefined) {
+            musicPromise.catch(() => {
+                // Autoplay failed - wait for ANY interaction
+                const retry = () => {
+                    startMusic();
+                    // Remove all listeners once one triggers
+                    document.removeEventListener('click', retry);
+                    document.removeEventListener('keydown', retry);
+                    document.removeEventListener('touchstart', retry);
+                };
+                
+                document.addEventListener('click', retry, { once: true });
+                document.addEventListener('keydown', retry, { once: true });
+                document.addEventListener('touchstart', retry, { once: true });
+            });
+        }
     }
 }
 
