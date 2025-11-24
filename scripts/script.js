@@ -310,6 +310,7 @@ function playCountdownSfx() {
 function playCardHoverSfx() {
     if (!isMuted) {
         cardHoverSfx.currentTime = 0;
+        cardHoverSfx.volume = 0.2;
         cardHoverSfx.play().catch(() => {});
     }
 }
