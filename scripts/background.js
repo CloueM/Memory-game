@@ -12,12 +12,12 @@ export function createFallingLeaves() {
         leaf.style.left = left + '%';
         
         // random size
-        var size = Math.random() * 40 + 30; // 30px to 70px
+        var size = Math.random() * 70 + 50;
         leaf.style.width = size + 'px';
         leaf.style.height = size + 'px';
         
         // random animation duration
-        var duration = Math.random() * 10 + 5; // 5s to 15s
+        var duration = Math.random() * 10 + 5;
         leaf.style.animationDuration = duration + 's';
         
         // random delay
