@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, $primary-color, $secondary-color); // Fun gradient
+    background: linear-gradient(135deg, $primary-color, $secondary-color); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@
     }
 
     .content {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba($text-color-light, 0.95);
         padding: 50px;
         border-radius: 30px;
         text-align: center;
@@ -31,7 +31,7 @@
         flex-direction: column;
         gap: 30px;
         backdrop-filter: blur(10px);
-        border: 4px solid white;
+        border: 4px solid $text-color-light;
 
         .hero-section {
             .game-title {
@@ -63,14 +63,14 @@
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
-                max-width: 400px; // Limit width for better look
-                margin: 0 auto; // Center it
+                max-width: 400px; 
+                margin: 0 auto; 
                 width: 100%;
             }
         }
 
         .diff-btn {
-            background: white;
+            background: $text-color-light;
             color: $text-color-dark;
             border: 2px solid #eee;
             padding: 15px;
@@ -78,10 +78,10 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
-            flex-direction: row; // Horizontal layout
+            flex-direction: row; 
             align-items: center;
-            justify-content: center; // Center content
-            gap: 15px; // More gap between icon and text
+            justify-content: center; 
+            gap: 15px;
 
             .btn-icon {
                 font-size: 2rem;
@@ -90,8 +90,8 @@
             .btn-text {
                 font-weight: bold;
                 font-size: 1.1rem;
-                flex: 1; // Allow text to take space
-                text-align: left; // Align text to left
+                flex: 1;
+                text-align: left; 
             }
 
             .btn-time {

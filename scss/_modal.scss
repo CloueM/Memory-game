@@ -5,7 +5,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: $text-color-light;
     padding: 40px 60px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(12, 9, 9, 0.3);
@@ -63,7 +63,7 @@
         font-family: monospace;
         margin-top: 15px;
         padding: 10px;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba($text-color-light, 0.5);
         border-radius: 5px;
         text-align: left;
         white-space: pre-line;
@@ -124,7 +124,7 @@
 
     .play-again-btn {
         background: $primary-color;
-        color: white;
+        color: $text-color-light;
 
         &:hover {
             background: $secondary-color;
@@ -139,7 +139,7 @@
 
         &:hover {
             background: $primary-color;
-            color: white;
+            color: $text-color-light;
             transform: translateY(-2px);
         }
     }

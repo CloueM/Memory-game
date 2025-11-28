@@ -31,9 +31,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 15px; // More rounded
-        font-size: 3.5rem; // Larger font
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow
+        border-radius: 15px; 
+        font-size: 3.5rem; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 
         @media (max-width: 600px) {
             font-size: 2.5rem;
@@ -44,14 +44,14 @@
         background: $card-back-bg;
         color: $text-color-light;
         font-weight: bold;
-        border: 2px solid rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba($text-color-light, 0.1);
     }
 
     &-back {
-        background: white;
+        background: $text-color-light;
         transform: rotateY(180deg);
         box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
-        border: 2px solid white;
+        border: 2px solid $text-color-light;
     }
 
     &:not(.flipped):not(.matched):hover .card-front {
