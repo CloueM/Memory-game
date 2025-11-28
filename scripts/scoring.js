@@ -1,48 +1,112 @@
 import { gameState, dom, MAX_TIME, DIFFICULTIES } from './state.js';
 import { playGameWonSfx } from './audio.js';
 
+// calculating the score
 export function calculateScore() {
-    const totalMoves = gameState.rightMoves + gameState.wrongMoves;
-    const accuracy = totalMoves === 0 ? 0 : (gameState.rightMoves / totalMoves) * 100;
+    // save state to variables
+    var right = gameState.rightMoves;
+    var wrong = gameState.wrongMoves;
+    var currentDiff = gameState.currentDifficulty;
+    var timeLeft = gameState.timeLeft;
     
-    let timeFactor = 100;
-    if (gameState.currentDifficulty !== 'chill') {
-        timeFactor = (gameState.timeLeft / MAX_TIME) * 100;
+    // total moves
+    var totalMoves = right + wrong;
+    
+    // accuracy calculation
+    var accuracy = 0;
+    if (totalMoves > 0) {
+        accuracy = (right / totalMoves) * 100;
     }
     
-    // Weighted Score: 60% Accuracy, 40% Time
-    let baseScore = (accuracy * 0.6) + (timeFactor * 0.4);
+    // time calculation
+    var timeFactor = 100;
+    if (currentDiff !== 'chill') {
+        timeFactor = (timeLeft / MAX_TIME) * 100;
+    }
     
-    // Apply Difficulty Multiplier
-    let final = Math.round(baseScore * DIFFICULTIES[gameState.currentDifficulty].multiplier);
+    // weights
+    var accuracyWeight = 0.6;
+    var timeWeight = 0.4;
     
-    return final;
+    var accuracyPart = accuracy * accuracyWeight;
+    var timePart = timeFactor * timeWeight;
+    
+    // base score
+    var baseScore = accuracyPart + timePart;
+    
+    // difficulty multiplier
+    var diffSettings = DIFFICULTIES[currentDiff];
+    var multiplier = diffSettings.multiplier;
+    
+    // final calculation
+    var finalScore = baseScore * multiplier;
+    var roundedScore = Math.round(finalScore);
+    
+    return roundedScore;
 }
 
+// show the win screen
 export function showWinMessage() {
     playGameWonSfx();
-    const totalMoves = gameState.rightMoves + gameState.wrongMoves;
-    const accuracy = totalMoves === 0 ? 0 : (gameState.rightMoves / totalMoves) * 100;
     
-    let timeFactor = 100;
-    if (gameState.currentDifficulty !== 'chill') {
-        timeFactor = (gameState.timeLeft / MAX_TIME) * 100;
+    // save state to variables
+    var right = gameState.rightMoves;
+    var wrong = gameState.wrongMoves;
+    var currentDiff = gameState.currentDifficulty;
+    var timeLeft = gameState.timeLeft;
+    
+    // stats
+    var totalMoves = right + wrong;
+    
+    var accuracy = 0;
+    if (totalMoves > 0) {
+        accuracy = (right / totalMoves) * 100;
     }
     
-    const score = calculateScore();
+    var timeFactor = 100;
+    if (currentDiff !== 'chill') {
+        timeFactor = (timeLeft / MAX_TIME) * 100;
+    }
+    
+    // get score
+    var score = calculateScore();
+    
+    // update screen text
     dom.finalScore.textContent = score;
+    dom.finalRight.textContent = right;
+    dom.finalWrong.textContent = wrong;
     
-    dom.finalRight.textContent = gameState.rightMoves;
-    dom.finalWrong.textContent = gameState.wrongMoves;
-    dom.finalTime.textContent = gameState.currentDifficulty === 'chill' ? '∞' : gameState.timeLeft;
-    dom.finalMultiplier.textContent = `${DIFFICULTIES[gameState.currentDifficulty].multiplier}x`;
+    // time display
+    if (currentDiff === 'chill') {
+        dom.finalTime.textContent = '∞';
+    } else {
+        dom.finalTime.textContent = timeLeft;
+    }
     
-    const formulaText = `
-        Accuracy: (${gameState.rightMoves}/${totalMoves}) × 100 × 0.6 = ${Math.round(accuracy * 0.6)}
-        Time: (${gameState.currentDifficulty === 'chill' ? '∞' : gameState.timeLeft}/${MAX_TIME}) × 100 × 0.4 = ${Math.round(timeFactor * 0.4)}
-        Total: (${Math.round(accuracy * 0.6)} + ${Math.round(timeFactor * 0.4)}) × ${DIFFICULTIES[gameState.currentDifficulty].multiplier}x = ${score}
-    `;
+    // multiplier display
+    var diffSettings = DIFFICULTIES[currentDiff];
+    var multiplier = diffSettings.multiplier;
+    dom.finalMultiplier.textContent = multiplier + 'x';
+    
+    // formula explanation
+    var accuracyWeight = 0.6;
+    var timeWeight = 0.4;
+    
+    var accuracyMath = Math.round(accuracy * accuracyWeight);
+    var timeMath = Math.round(timeFactor * timeWeight);
+    
+    var timeLeftText = timeLeft;
+    if (currentDiff === 'chill') {
+        timeLeftText = '∞';
+    }
+    
+    var formulaText = '';
+    formulaText = formulaText + 'Accuracy: (' + right + '/' + totalMoves + ') × 100 × ' + accuracyWeight + ' = ' + accuracyMath + '\n';
+    formulaText = formulaText + 'Time: (' + timeLeftText + '/' + MAX_TIME + ') × 100 × ' + timeWeight + ' = ' + timeMath + '\n';
+    formulaText = formulaText + 'Total: (' + accuracyMath + ' + ' + timeMath + ') × ' + multiplier + 'x = ' + score;
+    
     dom.scoreFormula.innerText = formulaText;
     
+    // show modal
     dom.winMessage.classList.remove('hidden');
 }
