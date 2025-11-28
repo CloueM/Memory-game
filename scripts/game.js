@@ -4,18 +4,20 @@ import { playCardHoverSfx, playCardFlipSfx, playMatchSfx, playNotMatchSfx, playG
 import { updateTimerDisplay, triggerGlow } from './timer.js';
 import { showWinMessage } from './scoring.js';
 
+// Game over logic
 export function gameOver() {
     gameState.isProcessing = true;
     playGameOverSfx();
     dom.gameOverMessage.classList.remove('hidden');
 }
 
+// Check if flipped cards match
 export function checkMatch() {
-    const card1 = gameState.flippedCards[0];
-    const card2 = gameState.flippedCards[1];
+    var card1 = gameState.flippedCards[0];
+    var card2 = gameState.flippedCards[1];
     
-    const symbol1 = card1.dataset.symbol;
-    const symbol2 = card2.dataset.symbol;
+    var symbol1 = card1.dataset.symbol;
+    var symbol2 = card2.dataset.symbol;
     
     if (symbol1 === symbol2) {
         // Match found
@@ -27,9 +29,9 @@ export function checkMatch() {
         gameState.rightMoves = gameState.rightMoves + 1;
         dom.rightCount.textContent = gameState.rightMoves;
         
-        // Time bonus for non-chill modes
+        // Add bonus time if not in chill mode
         if (gameState.currentDifficulty !== 'chill') {
-            const bonusTime = DIFFICULTIES[gameState.currentDifficulty].modifier;
+            var bonusTime = DIFFICULTIES[gameState.currentDifficulty].modifier;
             gameState.timeLeft = gameState.timeLeft + bonusTime;
             
             if (gameState.timeLeft > MAX_TIME) {
@@ -43,7 +45,7 @@ export function checkMatch() {
         gameState.flippedCards = [];
         gameState.isProcessing = false;
         
-        // Check for win condition
+        // Check win condition
         if (gameState.matchedPairs === cardSymbols.length) {
             clearInterval(gameState.timerInterval);
             stopTickingSfx();
@@ -58,9 +60,9 @@ export function checkMatch() {
         gameState.wrongMoves = gameState.wrongMoves + 1;
         dom.wrongCount.textContent = gameState.wrongMoves;
 
-        // Time penalty for non-chill modes
+        // Penalty time if not in chill mode
         if (gameState.currentDifficulty !== 'chill') {
-            const penaltyTime = DIFFICULTIES[gameState.currentDifficulty].modifier;
+            var penaltyTime = DIFFICULTIES[gameState.currentDifficulty].modifier;
             gameState.timeLeft = gameState.timeLeft - penaltyTime;
             
             updateTimerDisplay();
@@ -74,7 +76,7 @@ export function checkMatch() {
             }
         }
 
-        // Flip cards back after delay
+        // Flip back after delay
         setTimeout(function() {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
@@ -84,12 +86,13 @@ export function checkMatch() {
     }
 }
 
+// Handle card clicks
 export function handleCardClick(event) {
     if (gameState.isProcessing === true) {
         return;
     }
     
-    const card = event.currentTarget;
+    var card = event.currentTarget;
     
     if (card.classList.contains('flipped')) {
         return;
@@ -103,6 +106,7 @@ export function handleCardClick(event) {
     playCardFlipSfx();
     gameState.flippedCards.push(card);
     
+    // Check match when 2 cards are flipped
     if (gameState.flippedCards.length === 2) {
         gameState.isProcessing = true;
         gameState.moves = gameState.moves + 1;
@@ -111,12 +115,13 @@ export function handleCardClick(event) {
     }
 }
 
+// Generate cards on the board
 export function createCards() {
     dom.gameBoard.innerHTML = '';
     
-    for (let i = 0; i < gameState.cards.length; i++) {
-        const symbol = gameState.cards[i];
-        const card = document.createElement('div');
+    for (var i = 0; i < gameState.cards.length; i++) {
+        var symbol = gameState.cards[i];
+        var card = document.createElement('div');
         
         card.classList.add('card');
         card.dataset.symbol = symbol;
@@ -134,10 +139,11 @@ export function createCards() {
     }
 }
 
+// Initialize game state
 export function initGame(difficulty) {
     gameState.currentDifficulty = difficulty;
     
-    // Reset game state
+    // Reset variables
     gameState.cards = [];
     gameState.flippedCards = [];
     gameState.matchedPairs = 0;
@@ -153,10 +159,12 @@ export function initGame(difficulty) {
     dom.winMessage.classList.add('hidden');
     dom.gameOverMessage.classList.add('hidden');
     
-    const cardPairs = cardSymbols.concat(cardSymbols);
+    // Setup cards
+    var cardPairs = cardSymbols.concat(cardSymbols);
     gameState.cards = shuffleArray(cardPairs);
     createCards();
 
+    // Reset timer
     clearInterval(gameState.timerInterval);
     
     if (DIFFICULTIES[difficulty].startTime !== null) {
@@ -167,4 +175,3 @@ export function initGame(difficulty) {
         dom.timerBar.style.backgroundColor = '#48bb78';
     }
 }
-

@@ -1,7 +1,6 @@
 import { gameState, dom } from './state.js';
 
 const audioElements = {
-    bgMusic: document.getElementById('bg-music'),
     bgForest: document.getElementById('bg-forest'),
     hoverSfx: document.getElementById('hover-sfx'),
     selectSfx: document.getElementById('select-sfx'),
@@ -16,21 +15,20 @@ const audioElements = {
 };
 
 // Set initial volume
-audioElements.bgMusic.volume = 0.2;
+audioElements.bgForest.volume = 1;
 
 export function toggleMute() {
     // Special handling for Autoplay Blocked state:
     // If the game is NOT muted, but the music is paused, it means the browser blocked autoplay.
     // In this case, if the user clicks the mute button (which shows 'Sound On'),
     // we should interpret this as an interaction to START the music, not to mute it.
-    if (!gameState.isMuted && audioElements.bgMusic.paused) {
+    if (!gameState.isMuted && audioElements.bgForest.paused) {
         playMusic();
         updateMuteIcons(); // Ensure icons are correct (should still be unmuted)
         return;
     }
 
     gameState.isMuted = !gameState.isMuted;
-    audioElements.bgMusic.muted = gameState.isMuted;
     audioElements.bgForest.muted = gameState.isMuted;
     
     if (gameState.isMuted) {
@@ -41,7 +39,7 @@ export function toggleMute() {
     updateMuteIcons();
     
     // If unmuting and paused, try to play
-    if (!gameState.isMuted && audioElements.bgMusic.paused) {
+    if (!gameState.isMuted && audioElements.bgForest.paused) {
         playMusic();
     }
 }
@@ -54,18 +52,14 @@ export function updateMuteIcons() {
 
 export function playMusic() {
     if (!gameState.isMuted) {
-        audioElements.bgMusic.play().catch(e => console.log("Bg music play failed:", e));
         audioElements.bgForest.play().catch(e => console.log("Forest sfx play failed:", e));
     }
 }
 
 export function startMusic() {
-    if (!gameState.isMuted && audioElements.bgMusic.paused) {
+    if (!gameState.isMuted && audioElements.bgForest.paused) {
         // Try to play background music
-        const musicPromise = audioElements.bgMusic.play();
-        
-        // Try to play forest SFX (independently)
-        audioElements.bgForest.play().catch(e => console.warn("Forest SFX failed:", e));
+        const musicPromise = audioElements.bgForest.play();
 
         if (musicPromise !== undefined) {
             musicPromise.catch(() => {
