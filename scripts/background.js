@@ -1,4 +1,3 @@
-// function to create falling leaves
 export function createFallingLeaves() {
     var container = document.getElementById('leaves-container');
     var leafCount = 20; // number of leaves

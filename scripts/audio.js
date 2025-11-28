@@ -1,6 +1,7 @@
 import { gameState, dom } from './state.js';
 
-const audioElements = {
+// grabbing all the audio elements
+var audioElements = {
     bgForest: document.getElementById('bg-forest'),
     hoverSfx: document.getElementById('hover-sfx'),
     selectSfx: document.getElementById('select-sfx'),
@@ -14,139 +15,167 @@ const audioElements = {
     clockTickingSfx: document.getElementById('clock-ticking-sfx')
 };
 
-// Set initial volume
+// start with full volume
 audioElements.bgForest.volume = 1;
 
+// toggle mute on/off
 export function toggleMute() {
-    // Special handling for Autoplay Blocked state:
-    // If the game is NOT muted, but the music is paused, it means the browser blocked autoplay.
-    // In this case, if the user clicks the mute button (which shows 'Sound On'),
-    // we should interpret this as an interaction to START the music, not to mute it.
-    if (!gameState.isMuted && audioElements.bgForest.paused) {
-        playMusic();
-        updateMuteIcons(); // Ensure icons are correct (should still be unmuted)
-        return;
+    // if autoplay was blocked, this button click should start the music
+    if (gameState.isMuted === false) {
+        if (audioElements.bgForest.paused === true) {
+            playMusic();
+            updateMuteIcons();
+            return;
+        }
     }
 
-    gameState.isMuted = !gameState.isMuted;
+    // flip the mute variable
+    if (gameState.isMuted === true) {
+        gameState.isMuted = false;
+    } else {
+        gameState.isMuted = true;
+    }
+
+    // update the actual audio element
     audioElements.bgForest.muted = gameState.isMuted;
     
-    if (gameState.isMuted) {
+    // stop ticking if we muted
+    if (gameState.isMuted === true) {
         stopTickingSfx();
     }
-    // Note: The logic to resume ticking if unmuted is handled by the timer loop in timer.js
 
     updateMuteIcons();
     
-    // If unmuting and paused, try to play
-    if (!gameState.isMuted && audioElements.bgForest.paused) {
-        playMusic();
+    // if we unmuted, try playing music again
+    if (gameState.isMuted === false) {
+        if (audioElements.bgForest.paused === true) {
+            playMusic();
+        }
     }
 }
 
+// update the speaker icon
 export function updateMuteIcons() {
-    const icon = gameState.isMuted ? '🔇' : '🔊';
+    var icon;
+    
+    if (gameState.isMuted === true) {
+        icon = '🔇';
+    } else {
+        icon = '🔊';
+    }
+
     dom.welcomeMuteBtn.textContent = icon;
     dom.gameMuteBtn.textContent = icon;
 }
 
+// play the background music
 export function playMusic() {
-    if (!gameState.isMuted) {
-        audioElements.bgForest.play().catch(e => console.log("Forest sfx play failed:", e));
-    }
-}
-
-export function startMusic() {
-    if (!gameState.isMuted && audioElements.bgForest.paused) {
-        // Try to play background music
-        const musicPromise = audioElements.bgForest.play();
-
-        if (musicPromise !== undefined) {
-            musicPromise.catch(() => {
-                // Autoplay failed - wait for ANY interaction
-                const retry = () => {
-                    startMusic();
-                    // Remove all listeners once one triggers
-                    document.removeEventListener('click', retry);
-                    document.removeEventListener('keydown', retry);
-                    document.removeEventListener('touchstart', retry);
-                };
-                
-                document.addEventListener('click', retry, { once: true });
-                document.addEventListener('keydown', retry, { once: true });
-                document.addEventListener('touchstart', retry, { once: true });
+    if (gameState.isMuted === false) {
+        var playPromise = audioElements.bgForest.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(function(error) {
+                console.log("Music play failed: " + error);
             });
         }
     }
 }
 
+// start music with a retry if autoplay fails
+export function startMusic() {
+    if (gameState.isMuted === false) {
+        if (audioElements.bgForest.paused === true) {
+            var musicPromise = audioElements.bgForest.play();
+
+            if (musicPromise !== undefined) {
+                musicPromise.catch(function() {
+                    // if blocked, wait for a click to try again
+                    function retry() {
+                        startMusic();
+                        document.removeEventListener('click', retry);
+                        document.removeEventListener('keydown', retry);
+                        document.removeEventListener('touchstart', retry);
+                    }
+                    
+                    document.addEventListener('click', retry, { once: true });
+                    document.addEventListener('keydown', retry, { once: true });
+                    document.addEventListener('touchstart', retry, { once: true });
+                });
+            }
+        }
+    }
+}
+
+// sound effects functions
 export function playHoverSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.hoverSfx.currentTime = 0;
-        audioElements.hoverSfx.play().catch(() => {});
+        audioElements.hoverSfx.play().catch(function() {});
     }
 }
 
 export function playSelectSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.selectSfx.currentTime = 0;
-        audioElements.selectSfx.play().catch(() => {});
+        audioElements.selectSfx.play().catch(function() {});
     }
 }
 
 export function playCountdownSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.countdownSfx.currentTime = 0;
-        audioElements.countdownSfx.play().catch(() => {});
+        audioElements.countdownSfx.play().catch(function() {});
     }
 }
 
 export function playCardHoverSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.cardHoverSfx.currentTime = 0;
         audioElements.cardHoverSfx.volume = 0.2;
-        audioElements.cardHoverSfx.play().catch(() => {});
+        audioElements.cardHoverSfx.play().catch(function() {});
     }
 }
 
 export function playCardFlipSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.cardFlipSfx.currentTime = 0;
-        audioElements.cardFlipSfx.play().catch(() => {});
+        audioElements.cardFlipSfx.play().catch(function() {});
     }
 }
 
 export function playMatchSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.matchSfx.currentTime = 0;
-        audioElements.matchSfx.play().catch(() => {});
+        audioElements.matchSfx.play().catch(function() {});
     }
 }
 
 export function playNotMatchSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.notMatchSfx.currentTime = 0;
-        audioElements.notMatchSfx.play().catch(() => {});
+        audioElements.notMatchSfx.play().catch(function() {});
     }
 }
 
 export function playGameOverSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.gameOverSfx.currentTime = 0;
-        audioElements.gameOverSfx.play().catch(() => {});
+        audioElements.gameOverSfx.play().catch(function() {});
     }
 }
 
 export function playGameWonSfx() {
-    if (!gameState.isMuted) {
+    if (gameState.isMuted === false) {
         audioElements.gameWonSfx.currentTime = 0;
-        audioElements.gameWonSfx.play().catch(() => {});
+        audioElements.gameWonSfx.play().catch(function() {});
     }
 }
 
 export function playTickingSfx() {
-    if (!gameState.isMuted && audioElements.clockTickingSfx.paused) {
-        audioElements.clockTickingSfx.play().catch(() => {});
+    if (gameState.isMuted === false) {
+        if (audioElements.clockTickingSfx.paused === true) {
+            audioElements.clockTickingSfx.play().catch(function() {});
+        }
     }
 }
 
