@@ -22,29 +22,29 @@
     .content {
         background: rgba($text-color-light, 0.95);
         padding: 50px;
-        border-radius: 30px;
+        border-radius: $border-radius-xxl;
         text-align: center;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         max-width: 700px;
         width: 90%;
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: $spacing-xxl;
         backdrop-filter: blur(10px);
         border: 4px solid $text-color-light;
 
         .hero-section {
             .game-title {
-                font-size: 4rem;
+                font-size: $font-size-7xl;
                 color: $primary-color;
-                margin-bottom: 10px;
+                margin-bottom: $spacing-md;
                 text-shadow: 3px 3px 0px $accent-color;
                 letter-spacing: 2px;
                 animation: float 3s ease-in-out infinite;
             }
 
             .game-subtitle {
-                font-size: 1.5rem;
+                font-size: $font-size-2xl;
                 color: $text-color-dark;
                 font-weight: 600;
             }
@@ -52,9 +52,9 @@
 
         .level-select-container {
             h3 {
-                font-size: 1.2rem;
+                font-size: $font-size-xl;
                 color: #888;
-                margin-bottom: 15px;
+                margin-bottom: $spacing-md;
                 text-transform: uppercase;
                 letter-spacing: 1px;
             }
@@ -62,7 +62,7 @@
             .difficulty-buttons {
                 display: flex;
                 flex-direction: column;
-                gap: 15px;
+                gap: $spacing-md;
                 max-width: 400px; 
                 margin: 0 auto; 
                 width: 100%;
@@ -73,34 +73,34 @@
             background: $text-color-light;
             color: $text-color-dark;
             border: 2px solid #eee;
-            padding: 15px;
-            border-radius: 15px;
+            padding: $spacing-md;
+            border-radius: $border-radius-lg;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: row; 
             align-items: center;
             justify-content: center; 
-            gap: 15px;
+            gap: $spacing-md;
 
             .btn-icon {
-                font-size: 2rem;
+                font-size: $font-size-3xl;
             }
 
             .btn-text {
                 font-weight: bold;
-                font-size: 1.1rem;
+                font-size: $font-size-lg;
                 flex: 1;
                 text-align: left; 
             }
 
             .btn-time {
-                font-size: 0.9rem;
+                font-size: $font-size-sm;
                 opacity: 0.8;
                 font-weight: normal;
                 background: rgba(0,0,0,0.05);
                 padding: 4px 8px;
-                border-radius: 10px;
+                border-radius: $border-radius-md;
             }
 
             &:hover {
@@ -119,9 +119,9 @@
         }
 
         .site-footer {
-            margin-top: 20px;
+            margin-top: $spacing-xl;
             p {
-                font-size: 0.9rem;
+                font-size: $font-size-sm;
                 color: #aaa;
             }
         }

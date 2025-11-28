@@ -1,12 +1,12 @@
 @use 'variables' as *;
 
 #restart-btn, #main-menu-game-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 10px $spacing-xl;
+    font-size: $font-size-md;
     background-color: $primary-color;
     color: $text-color-light;
     border: none;
-    border-radius: 5px;
+    border-radius: $border-radius-sm;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
@@ -27,7 +27,7 @@
     color: $primary-color;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: $spacing-sm;
 
     &:hover {
         background-color: $primary-color;
@@ -43,7 +43,7 @@
 .mute-btn {
     background: transparent;
     border: none;
-    font-size: 2rem;
+    font-size: $font-size-3xl;
     cursor: pointer;
     padding: 10px;
     transition: transform 0.2s ease;
@@ -60,8 +60,8 @@
 
 #welcome-mute-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: $spacing-xl;
+    right: $spacing-xl;
 }
 
 .game-header-wrapper {
@@ -70,7 +70,7 @@
     align-items: center;
     position: relative;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
 
     .game-header {
         margin: 0;
@@ -79,6 +79,6 @@
     #game-mute-btn {
         position: absolute;
         right: 0;
-        font-size: 1.5rem;
+        font-size: $font-size-2xl;
     }
 }

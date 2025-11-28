@@ -8,14 +8,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: $spacing-xl;
 }
 
 h1 {
     text-align: center;
     color: $text-color-light;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+    font-size: $font-size-4xl;
+    margin-bottom: $spacing-xxl;
     text-shadow: 2px 2px 4px $shadow-dark;
 
     @media (max-width: 600px) {

@@ -1,11 +1,45 @@
-$bg-color: #F4F7ED; // Pale Matcha Foam
-$text-color-dark: #2B3811; // Dark Olive
+$bg-color: #F4F7ED; 
+$text-color-dark: #2B3811; 
 $text-color-light: white;
-$primary-color: #40531A; // Deep Matcha
-$secondary-color: #7C9A55; // Fresh Matcha
-$accent-color: #C7D59F; // Matcha Milk/Latte
-$card-back-bg: #40531A; // Deep Matcha
+$primary-color: #40531A; 
+$bg-color: #F4F7ED; 
+$text-color-dark: #2B3811; 
+$text-color-light: white;
+$primary-color: #40531A; 
+$secondary-color: #7C9A55; 
+$accent-color: #C7D59F; 
+$card-back-bg: #40531A; 
 $shadow-light: rgba(64, 83, 26, 0.1);
 $shadow-medium: rgba(64, 83, 26, 0.15);
 $shadow-dark: rgba(64, 83, 26, 0.2);
 $font-stack: 'Fredoka', 'Arial', sans-serif; // Rounded, fun font
+
+// Spacing
+$spacing-xs: 0.25rem;  // 4px
+$spacing-sm: 0.5rem;   // 8px
+$spacing-md: 1rem;     // 16px
+$spacing-lg: 1.5rem;   // 24px
+$spacing-xl: 2rem;     // 32px
+$spacing-xxl: 3rem;    // 48px
+
+// Font Sizes
+$font-size-xs: 0.85rem;
+$font-size-sm: 0.9rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.1rem;
+$font-size-xl: 1.2rem;
+$font-size-xxl: 1.3rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+$font-size-4xl: 2.5rem;
+$font-size-5xl: 3rem;
+$font-size-6xl: 3.5rem;
+$font-size-7xl: 4rem;
+$font-size-8xl: 8rem;
+
+// Border Radius
+$border-radius-sm: 5px;
+$border-radius-md: 10px;
+$border-radius-lg: 15px;
+$border-radius-xl: 20px;
+$border-radius-xxl: 30px;
