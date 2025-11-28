@@ -1,5 +1,5 @@
 import { gameState, dom, cardSymbols, DIFFICULTIES, MAX_TIME } from './state.js';
-import { shuffleArray } from './utils.js';
+
 import { playCardHoverSfx, playCardFlipSfx, playMatchSfx, playNotMatchSfx, playGameOverSfx, stopTickingSfx } from './audio.js';
 import { updateTimerDisplay, triggerGlow } from './timer.js';
 import { showWinMessage } from './scoring.js';
@@ -137,6 +137,22 @@ export function createCards() {
         card.addEventListener('mouseenter', playCardHoverSfx);
         dom.gameBoard.appendChild(card);
     }
+}
+
+// shuffle the cards
+function shuffleArray(array) {
+    // loop backwards from the end
+    for (var i = array.length - 1; i > 0; i--) {
+        // pick a random spot
+        var j = Math.floor(Math.random() * (i + 1));
+        
+        // swap them
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    return array;
 }
 
 // Initialize game state
