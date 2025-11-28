@@ -33,6 +33,12 @@
         backdrop-filter: blur(10px);
         border: 4px solid $text-color-light;
 
+        @media (max-width: $mobile) {
+            padding: $spacing-lg;
+            gap: $spacing-lg;
+            width: 95%;
+        }
+
         .hero-section {
             .game-title {
                 font-size: $font-size-7xl;
@@ -41,12 +47,20 @@
                 text-shadow: 3px 3px 0px $accent-color;
                 letter-spacing: 2px;
                 animation: float 3s ease-in-out infinite;
+
+                @media (max-width: $mobile) {
+                    font-size: $font-size-5xl;
+                }
             }
 
             .game-subtitle {
                 font-size: $font-size-2xl;
                 color: $text-color-dark;
                 font-weight: 600;
+
+                @media (max-width: $mobile) {
+                    font-size: $font-size-lg;
+                }
             }
         }
 
@@ -82,6 +96,11 @@
             align-items: center;
             justify-content: center; 
             gap: $spacing-md;
+
+            @media (max-width: $mobile) {
+                padding: $spacing-sm;
+                gap: $spacing-sm;
+            }
 
             .btn-icon {
                 font-size: $font-size-3xl;

@@ -19,7 +19,7 @@ h1 {
     margin-bottom: $spacing-xxl;
     text-shadow: 2px 2px 4px $shadow-dark;
 
-    @media (max-width: 600px) {
+    @media (max-width: $mobile) {
         font-size: 1.8rem;
     }
 }

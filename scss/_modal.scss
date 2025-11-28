@@ -11,6 +11,12 @@
     box-shadow: 0 10px 30px rgba(12, 9, 9, 0.3);
     text-align: center;
     z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+
+    @media (max-width: $mobile) {
+        padding: $spacing-lg;
+    }
 
     h2 {
         color: $primary-color;
@@ -44,6 +50,11 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: $spacing-md;
+        text-align: left;
+
+        @media (max-width: $mobile) {
+            grid-template-columns: 1fr;
+        }
         text-align: left;
     }
 
