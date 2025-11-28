@@ -6,18 +6,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; // click through
-    z-index: -1; // behind everything
+    pointer-events: none; 
+    z-index: -1; 
     overflow: hidden;
 }
 
 .leaf {
     position: absolute;
     top: -10%;
-    background-image: url('/assets/images/leaf-image.png');
+    background-image: url('/assets/images/one-leaf-nobg.png');
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.6;
+    opacity: 0.8;
     animation-name: fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;

@@ -6,7 +6,8 @@
 
 body {
   font-family: "Fredoka", "Arial", sans-serif;
-  background: #F4F7ED;
+  background: url("/assets/images/bamboo-forest-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
   color: #2B3811;
   min-height: 100vh;
   display: flex;
@@ -588,10 +589,10 @@ h1 {
 .leaf {
   position: absolute;
   top: -10%;
-  background-image: url("/assets/images/leaf-image.png");
+  background-image: url("/assets/images/one-leaf-nobg.png");
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.6;
+  opacity: 0.8;
   animation-name: fall;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

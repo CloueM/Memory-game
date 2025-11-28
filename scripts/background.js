@@ -12,7 +12,7 @@ export function createFallingLeaves() {
         leaf.style.left = left + '%';
         
         // random size
-        var size = Math.random() * 30 + 20; // 20px to 50px
+        var size = Math.random() * 40 + 30; // 30px to 70px
         leaf.style.width = size + 'px';
         leaf.style.height = size + 'px';
         
