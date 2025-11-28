@@ -1,4 +1,4 @@
-export const cardSymbols = ['🎮', '🎯', '🎨', '🎭', '🎪', '🎸'];
+export const cardSymbols = ['🍂', '🍃', '🍁', '🍀', '🌿', '🌱'];
 
 export const MAX_TIME = 60;
 
