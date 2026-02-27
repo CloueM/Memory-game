@@ -6,9 +6,10 @@
 
 body {
   font-family: "Fredoka", "Arial", sans-serif;
-  background: url("/assets/images/bamboo-forest-bg.jpg") no-repeat center center fixed;
+  background: url("../assets/images/bamboo-forest-bg.jpg") no-repeat center
+    center fixed;
   background-size: cover;
-  color: #2B3811;
+  color: #2b3811;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -36,9 +37,9 @@ h1 {
 }
 .container .game-header {
   font-size: 3rem;
-  color: #40531A;
+  color: #40531a;
   margin-bottom: 2rem;
-  text-shadow: 3px 3px 0px #C7D59F;
+  text-shadow: 3px 3px 0px #c7d59f;
   letter-spacing: 2px;
   animation: float 3s ease-in-out infinite;
   text-align: center;
@@ -91,10 +92,10 @@ h1 {
 .stat-item {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #2B3811;
+  color: #2b3811;
 }
 .stat-item span {
-  color: #40531A;
+  color: #40531a;
   font-size: 1.3rem;
 }
 .stat-item.right span {
@@ -111,7 +112,9 @@ h1 {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 @media (max-width: 600px) {
   .timer-container {
@@ -133,7 +136,9 @@ h1 {
   height: 100%;
   width: 100%;
   background-color: #48bb78;
-  transition: width 1s linear, background-color 1s linear;
+  transition:
+    width 1s linear,
+    background-color 1s linear;
   border-radius: 10px;
 }
 
@@ -206,10 +211,11 @@ h1 {
     opacity: 1;
   }
 }
-#restart-btn, #main-menu-game-btn {
+#restart-btn,
+#main-menu-game-btn {
   padding: 10px 2rem;
   font-size: 1rem;
-  background-color: #40531A;
+  background-color: #40531a;
   color: white;
   border: none;
   border-radius: 5px;
@@ -217,24 +223,26 @@ h1 {
   transition: background-color 0.3s ease;
   font-weight: bold;
 }
-#restart-btn:hover, #main-menu-game-btn:hover {
-  background-color: #7C9A55;
+#restart-btn:hover,
+#main-menu-game-btn:hover {
+  background-color: #7c9a55;
   transform: translateY(-2px);
 }
-#restart-btn:active, #main-menu-game-btn:active {
+#restart-btn:active,
+#main-menu-game-btn:active {
   transform: translateY(0);
 }
 
 #main-menu-game-btn {
   background-color: transparent;
-  border: 2px solid #40531A;
-  color: #40531A;
+  border: 2px solid #40531a;
+  color: #40531a;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 #main-menu-game-btn:hover {
-  background-color: #40531A;
+  background-color: #40531a;
   color: white;
 }
 
@@ -301,7 +309,8 @@ h1 {
 .card.matched {
   pointer-events: none;
 }
-.card-front, .card-back {
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -314,12 +323,13 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 600px) {
-  .card-front, .card-back {
+  .card-front,
+  .card-back {
     font-size: 2.5rem;
   }
 }
 .card-front {
-  background: #40531A;
+  background: #40531a;
   color: white;
   font-weight: bold;
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -334,7 +344,7 @@ h1 {
   background: rgb(78.9724770642, 102.4174311927, 32.0825688073);
   transform: scale(1.05) translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border-color: #40531A;
+  border-color: #40531a;
 }
 
 .win-message {
@@ -357,12 +367,12 @@ h1 {
   }
 }
 .win-message h2 {
-  color: #40531A;
+  color: #40531a;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 .win-message p {
-  color: #2B3811;
+  color: #2b3811;
   font-size: 1.3rem;
   margin-bottom: 1rem;
 }
@@ -372,7 +382,7 @@ h1 {
   margin-bottom: 2rem;
 }
 .win-message #final-score {
-  color: #7C9A55;
+  color: #7c9a55;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -396,11 +406,11 @@ h1 {
 }
 .win-message .detail-item {
   font-size: 1.1rem;
-  color: #2B3811;
+  color: #2b3811;
 }
 .win-message .detail-item span {
   font-weight: bold;
-  color: #40531A;
+  color: #40531a;
 }
 .win-message .score-formula {
   font-size: 0.85rem;
@@ -426,7 +436,7 @@ h1 {
   width: 100%;
 }
 .win-message .text-btn:hover {
-  color: #40531A;
+  color: #40531a;
 }
 .win-message .score-explanation {
   background: #f0f0f0;
@@ -450,7 +460,8 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
 }
-.win-message .play-again-btn, .win-message .main-menu-btn {
+.win-message .play-again-btn,
+.win-message .main-menu-btn {
   border: none;
   padding: 10px 25px;
   font-size: 1.1rem;
@@ -460,26 +471,26 @@ h1 {
   font-weight: bold;
 }
 .win-message .play-again-btn {
-  background: #40531A;
+  background: #40531a;
   color: white;
 }
 .win-message .play-again-btn:hover {
-  background: #7C9A55;
+  background: #7c9a55;
   transform: translateY(-2px);
 }
 .win-message .main-menu-btn {
   background: transparent;
-  border: 2px solid #40531A;
-  color: #40531A;
+  border: 2px solid #40531a;
+  color: #40531a;
 }
 .win-message .main-menu-btn:hover {
-  background: #40531A;
+  background: #40531a;
   color: white;
   transform: translateY(-2px);
 }
 
 #final-moves {
-  color: #7C9A55;
+  color: #7c9a55;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -524,9 +535,9 @@ h1 {
 }
 .welcome-screen .content .hero-section .game-title {
   font-size: 4rem;
-  color: #40531A;
+  color: #40531a;
   margin-bottom: 1rem;
-  text-shadow: 3px 3px 0px #C7D59F;
+  text-shadow: 3px 3px 0px #c7d59f;
   letter-spacing: 2px;
   animation: float 3s ease-in-out infinite;
 }
@@ -537,7 +548,7 @@ h1 {
 }
 .welcome-screen .content .hero-section .game-subtitle {
   font-size: 1.5rem;
-  color: #2B3811;
+  color: #2b3811;
   font-weight: 600;
 }
 @media (max-width: 600px) {
@@ -562,7 +573,7 @@ h1 {
 }
 .welcome-screen .content .diff-btn {
   background: white;
-  color: #2B3811;
+  color: #2b3811;
   border: 2px solid #eee;
   padding: 1rem;
   border-radius: 15px;
@@ -599,11 +610,11 @@ h1 {
 }
 .welcome-screen .content .diff-btn:hover {
   transform: translateY(-5px) scale(1.05);
-  border-color: #40531A;
+  border-color: #40531a;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 .welcome-screen .content .diff-btn:hover .btn-text {
-  color: #40531A;
+  color: #40531a;
 }
 .welcome-screen .content .diff-btn:active {
   transform: translateY(0) scale(0.98);
@@ -641,7 +652,7 @@ h1 {
 .leaf {
   position: absolute;
   top: -10%;
-  background-image: url("/assets/images/one-leaf-nobg.png");
+  background-image: url("../assets/images/one-leaf-nobg.png");
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.8;

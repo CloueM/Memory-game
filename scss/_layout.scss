@@ -16,9 +16,14 @@
         animation: float 3s ease-in-out infinite;
         text-align: center;
 
+        @media (max-width: $tablet) {
+            font-size: $font-size-4xl;
+            margin-bottom: $spacing-md;
+        }
+
         @media (max-width: $mobile) {
             font-size: $font-size-3xl;
-            margin-bottom: $spacing-md;
+            margin-bottom: $spacing-sm;
         }
     }
 }
@@ -34,6 +39,10 @@
     box-shadow: 0 4px 6px $shadow-light;
     flex-wrap: wrap;
     gap: $spacing-md;
+
+    @media (max-width: $tablet) {
+        padding: 15px;
+    }
 
     @media (max-width: $mobile) {
         flex-direction: column;
@@ -83,6 +92,10 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
     
+    @media (max-width: $tablet) {
+        width: 150px;
+    }
+
     @media (max-width: $mobile) {
         width: 100%;
         order: 3;
@@ -125,8 +138,14 @@
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
     }
 
+    @media (max-width: $tablet) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: $spacing-sm;
+        padding: $spacing-lg;
+    }
+
     @media (max-width: $mobile) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr); // keeps a 4-column grid for standard pairs matching
         gap: $spacing-sm;
         padding: $spacing-md;
     }

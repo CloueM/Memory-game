@@ -35,8 +35,12 @@
         font-size: $font-size-6xl; 
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 
+        @media (max-width: $tablet) {
+            font-size: $font-size-5xl;
+        }
+
         @media (max-width: $mobile) {
-            font-size: $font-size-4xl;
+            font-size: $font-size-3xl; // Slightly smaller to prevent grid overflow on small devices
         }
     }
 
