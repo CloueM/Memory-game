@@ -49,5 +49,8 @@ export const dom = {
     scoreFormula: document.getElementById('score-formula'),
     scoreExplainBtn: document.getElementById('score-explain-btn'),
     scoreExplanation: document.getElementById('score-explanation'),
-    leaderboardList: document.getElementById('leaderboard-list')
+    leaderboardList: document.getElementById('leaderboard-list'),
+    viewScoresBtn: document.getElementById('view-scores-btn'),
+    leaderboardModal: document.getElementById('leaderboard-modal'),
+    closeLeaderboardBtn: document.getElementById('close-leaderboard-btn')
 };

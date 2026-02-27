@@ -156,66 +156,26 @@
         }
 
         .leaderboard-section {
-            h3 {
-                font-size: $font-size-xl;
-                color: $primary-color;
-                margin-bottom: $spacing-md;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-            }
-
-            .leaderboard-list {
-                list-style: none;
-                padding: 0;
-                margin: 0 auto;
-                max-width: 400px;
-                background: rgba($text-color-light, 0.8);
+            .view-scores-btn {
+                background: $primary-color;
+                color: $text-color-light;
+                border: none;
+                padding: $spacing-md $spacing-xl;
                 border-radius: $border-radius-lg;
+                cursor: pointer;
+                font-size: $font-size-xl;
+                font-weight: bold;
+                transition: all 0.3s ease;
                 box-shadow: 0 4px 6px $shadow-light;
-                overflow: hidden;
 
-                li {
-                    padding: $spacing-sm $spacing-md;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-bottom: 1px solid rgba(0,0,0,0.05);
-                    font-size: $font-size-md;
+                &:hover {
+                    background: $secondary-color;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 12px $shadow-medium;
+                }
 
-                    &:last-child {
-                        border-bottom: none;
-                    }
-
-                    .rank {
-                        font-weight: bold;
-                        color: #888;
-                        width: 30px;
-                        text-align: left;
-                    }
-
-                    .score {
-                        font-weight: bold;
-                        color: $primary-color;
-                        font-size: $font-size-lg;
-                        flex: 1;
-                        text-align: center;
-                    }
-
-                    .diff {
-                        font-size: $font-size-sm;
-                        padding: 4px 8px;
-                        border-radius: $border-radius-sm;
-                        text-transform: capitalize;
-                        color: $text-color-dark;
-                        width: 80px;
-                        text-align: center;
-                        background: rgba(0,0,0,0.05);
-
-                        &.easy { background: #e2e8f0; }
-                        &.medium { background: #fefcbf; color: #744210; }
-                        &.hard { background: #fed7d7; color: #822727; }
-                        &.wth { background: #1a202c; color: white; }
-                    }
+                &:active {
+                    transform: translateY(0);
                 }
             }
         }

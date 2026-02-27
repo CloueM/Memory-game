@@ -1,5 +1,5 @@
 export const LEADERBOARD_KEY = 'matchamoji-leaderboard';
-export const MAX_SCORES = 3;
+export const MAX_SCORES = 5;
 
 // Retrieve leaderboard from localStorage
 export function getLeaderboard() {

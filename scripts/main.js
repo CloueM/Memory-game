@@ -26,15 +26,28 @@ export function renderLeaderboard() {
         var entry = leaderboard[i];
         var li = document.createElement('li');
         
-        // Example output: "1. 3500 pts - Medium (30s)"
+        // Example output: "#1 | 3500 | Medium | 30s"
         li.innerHTML = `
             <span class="rank">#${i + 1}</span>
             <span class="score">${entry.score}</span>
             <span class="diff ${entry.difficulty}">${entry.difficulty}</span>
+            <span class="time">${entry.time}</span>
         `;
         dom.leaderboardList.appendChild(li);
     }
 }
+
+// handle opening/closing leaderboard
+dom.viewScoresBtn.addEventListener('click', function() {
+    renderLeaderboard();
+    dom.leaderboardModal.classList.remove('hidden');
+    playSelectSfx();
+});
+
+dom.closeLeaderboardBtn.addEventListener('click', function() {
+    dom.leaderboardModal.classList.add('hidden');
+    playSelectSfx();
+});
 
 // render on load
 renderLeaderboard();

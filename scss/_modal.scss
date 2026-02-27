@@ -161,3 +161,196 @@
     font-weight: bold;
     font-size: $font-size-2xl;
 }
+
+// Global modal overlay format 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-content {
+        background: rgba($text-color-light, 0.95);
+        padding: 40px;
+        border-radius: $border-radius-xl;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        transform: scale(1);
+        transition: transform 0.3s ease;
+        border: 4px solid $primary-color;
+
+        @media (max-width: $mobile) {
+            padding: 20px;
+        }
+
+        .modal-title {
+            color: $primary-color;
+            font-size: $font-size-3xl;
+            margin-bottom: $spacing-lg;
+            text-shadow: 1px 1px 0px $accent-color;
+        }
+
+        .close-modal-btn {
+            margin-top: $spacing-xl;
+            background: transparent;
+            border: 2px solid $primary-color;
+            color: $primary-color;
+            padding: 10px 30px;
+            font-size: $font-size-lg;
+            border-radius: $border-radius-sm;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+
+            &:hover {
+                background: $primary-color;
+                color: $text-color-light;
+            }
+        }
+    }
+
+    // Leaderboard Specific
+    // Leaderboard Specific
+    .leaderboard-modal-content {
+        background: linear-gradient(135deg, $text-color-light 0%, #f9fbf4 100%);
+        border: 4px solid $secondary-color;
+        padding: 50px 30px;
+        box-shadow: 0 25px 50px rgba(64, 83, 26, 0.25);
+        
+        .modal-title {
+            font-size: $font-size-4xl;
+            color: $primary-color;
+            margin-bottom: $spacing-xl;
+        }
+
+        .leaderboard-headers {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px $spacing-lg;
+            background: $secondary-color;
+            color: $text-color-light;
+            border-radius: $border-radius-lg $border-radius-lg 0 0;
+            font-weight: bold;
+            font-size: $font-size-md;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            .header-rank { width: 40px; text-align: left; }
+            .header-score { flex: 1; text-align: center; }
+            .header-diff { width: 80px; text-align: center; }
+            .header-time { width: 70px; text-align: right; }
+        }
+
+        .leaderboard-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba($text-color-light, 0.95);
+            border-radius: 0 0 $border-radius-lg $border-radius-lg;
+            box-shadow: 0 10px 15px $shadow-light;
+            overflow: hidden;
+            border: 2px solid $secondary-color;
+            border-top: none;
+
+            li {
+                padding: $spacing-md $spacing-lg;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(64, 83, 26, 0.1);
+                transition: all 0.3s ease;
+                font-size: $font-size-lg;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    background: rgba($accent-color, 0.2);
+                    transform: scale(1.02);
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                    z-index: 1;
+                    position: relative;
+                }
+
+                .rank {
+                    font-weight: bold;
+                    color: $text-color-dark;
+                    width: 40px;
+                    text-align: left;
+                    font-size: $font-size-xl;
+                }
+
+                // Dynamic Top 3 styling
+                &:nth-child(1) .rank { color: #D4AF37; font-size: $font-size-2xl; text-shadow: 1px 1px 0px rgba(0,0,0,0.1); } // Gold
+                &:nth-child(2) .rank { color: #C0C0C0; font-size: $font-size-xl; } // Silver
+                &:nth-child(3) .rank { color: #CD7F32; font-size: $font-size-xl; } // Bronze
+
+                .score {
+                    font-weight: bold;
+                    color: $primary-color;
+                    font-size: $font-size-2xl;
+                    flex: 1;
+                    text-align: center;
+                    letter-spacing: 1px;
+                }
+
+                .diff {
+                    font-size: $font-size-sm;
+                    padding: 6px 10px;
+                    border-radius: $border-radius-md;
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    width: 80px;
+                    text-align: center;
+                    letter-spacing: 0.5px;
+                    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+
+                    &.easy { background: $bg-color; color: $secondary-color; border: 1px solid $secondary-color; }
+                    &.medium { background: $accent-color; color: $primary-color; }
+                    &.hard { background: $secondary-color; color: $text-color-light; }
+                    &.wth { background: $primary-color; color: $text-color-light; }
+                }
+
+                .time {
+                    width: 70px;
+                    text-align: right;
+                    font-size: $font-size-md;
+                    color: $text-color-dark;
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .close-modal-btn {
+            background: $text-color-light;
+            border: 2px solid $secondary-color;
+            color: $secondary-color;
+            border-radius: $border-radius-md;
+            
+            &:hover {
+                background: $secondary-color;
+                color: $text-color-light;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px $shadow-medium;
+            }
+        }
+    }
+}
