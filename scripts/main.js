@@ -2,6 +2,7 @@ import { gameState, dom, DIFFICULTIES } from './state.js';
 import { toggleMute, updateMuteIcons, playMusic, startMusic, playHoverSfx, playSelectSfx, stopTickingSfx } from './audio.js';
 import { startCountdown, startTimer } from './timer.js';
 import { initGame, gameOver } from './game.js';
+import { getLeaderboard } from './storage.js';
 
 // start music and setup icons
 startMusic();
@@ -10,6 +11,33 @@ updateMuteIcons();
 // mute buttons
 dom.welcomeMuteBtn.addEventListener('click', toggleMute);
 dom.gameMuteBtn.addEventListener('click', toggleMute);
+
+// render leaderboard logic
+export function renderLeaderboard() {
+    var leaderboard = getLeaderboard();
+    dom.leaderboardList.innerHTML = '';
+    
+    if (leaderboard.length === 0) {
+        dom.leaderboardList.innerHTML = '<li>Play a game to set a high score!</li>';
+        return;
+    }
+    
+    for (var i = 0; i < leaderboard.length; i++) {
+        var entry = leaderboard[i];
+        var li = document.createElement('li');
+        
+        // Example output: "1. 3500 pts - Medium (30s)"
+        li.innerHTML = `
+            <span class="rank">#${i + 1}</span>
+            <span class="score">${entry.score}</span>
+            <span class="diff ${entry.difficulty}">${entry.difficulty}</span>
+        `;
+        dom.leaderboardList.appendChild(li);
+    }
+}
+
+// render on load
+renderLeaderboard();
 
 // helper to add sounds to buttons
 function addButtonSounds(btn) {

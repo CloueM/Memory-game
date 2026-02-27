@@ -48,5 +48,6 @@ export const dom = {
     finalMultiplier: document.getElementById('final-multiplier'),
     scoreFormula: document.getElementById('score-formula'),
     scoreExplainBtn: document.getElementById('score-explain-btn'),
-    scoreExplanation: document.getElementById('score-explanation')
+    scoreExplanation: document.getElementById('score-explanation'),
+    leaderboardList: document.getElementById('leaderboard-list')
 };

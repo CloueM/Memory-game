@@ -1,5 +1,7 @@
 import { gameState, dom, MAX_TIME, DIFFICULTIES } from './state.js';
 import { playGameWonSfx } from './audio.js';
+import { saveScore } from './storage.js';
+import { renderLeaderboard } from './main.js';
 
 // calculating the score
 export function calculateScore() {
@@ -106,6 +108,16 @@ export function showWinMessage() {
     formulaText = formulaText + 'Total: (' + accuracyMath + ' + ' + timeMath + ') × ' + multiplier + 'x = ' + score;
     
     dom.scoreFormula.innerText = formulaText;
+    
+    // save score to local storage
+    var timeStr = '∞';
+    if (currentDiff !== 'chill') {
+        timeStr = (MAX_TIME - timeLeft) + 's';
+    }
+    saveScore(score, currentDiff, timeStr);
+    
+    // update leaderboard UI
+    renderLeaderboard();
     
     // show modal
     dom.winMessage.classList.remove('hidden');
