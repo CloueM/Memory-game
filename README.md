@@ -31,4 +31,4 @@ If you want to modify the styling and explore the SCSS code:
 3. Install the **Live Sass Compiler** extension to compile any changes you make in the `.scss` files into the `styles/styles.css` output directory automatically.
 
 Enjoy! 🍵
-View Live: https://clouemac.com/matchamoji/
+[View Live](https://clouemac.com/matchamoji/)
