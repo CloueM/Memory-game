@@ -233,10 +233,19 @@
         padding: 50px 30px;
         box-shadow: 0 25px 50px rgba(64, 83, 26, 0.25);
         
+        @media (max-width: $mobile) {
+            padding: 20px 10px;
+        }
+
         .modal-title {
             font-size: $font-size-4xl;
             color: $primary-color;
             margin-bottom: $spacing-xl;
+            
+            @media (max-width: $mobile) {
+                font-size: $font-size-2xl;
+                margin-bottom: $spacing-md;
+            }
         }
 
         .leaderboard-headers {
@@ -252,10 +261,16 @@
             text-transform: uppercase;
             letter-spacing: 1px;
 
-            .header-rank { width: 40px; text-align: left; }
+            @media (max-width: $mobile) {
+                padding: 10px 5px;
+                font-size: 11px;
+                letter-spacing: 0;
+            }
+
+            .header-rank { width: 40px; text-align: left; @media (max-width: $mobile) { width: 30px; } }
             .header-score { flex: 1; text-align: center; }
-            .header-diff { width: 80px; text-align: center; }
-            .header-time { width: 70px; text-align: right; }
+            .header-diff { width: 80px; text-align: center; @media (max-width: $mobile) { width: 50px; } }
+            .header-time { width: 70px; text-align: right; @media (max-width: $mobile) { width: 50px; } }
         }
 
         .leaderboard-list {
@@ -278,6 +293,10 @@
                 transition: all 0.3s ease;
                 font-size: $font-size-lg;
 
+                @media (max-width: $mobile) {
+                    padding: 8px 5px;
+                }
+
                 &:last-child {
                     border-bottom: none;
                 }
@@ -296,12 +315,17 @@
                     width: 40px;
                     text-align: left;
                     font-size: $font-size-xl;
+                    
+                    @media (max-width: $mobile) {
+                        width: 30px;
+                        font-size: $font-size-md;
+                    }
                 }
 
                 // Dynamic Top 3 styling
-                &:nth-child(1) .rank { color: #D4AF37; font-size: $font-size-2xl; text-shadow: 1px 1px 0px rgba(0,0,0,0.1); } // Gold
-                &:nth-child(2) .rank { color: #C0C0C0; font-size: $font-size-xl; } // Silver
-                &:nth-child(3) .rank { color: #CD7F32; font-size: $font-size-xl; } // Bronze
+                &:nth-child(1) .rank { color: #D4AF37; font-size: $font-size-2xl; text-shadow: 1px 1px 0px rgba(0,0,0,0.1); @media (max-width: $mobile) { font-size: $font-size-lg; } } // Gold
+                &:nth-child(2) .rank { color: #C0C0C0; font-size: $font-size-xl; @media (max-width: $mobile) { font-size: $font-size-md; } } // Silver
+                &:nth-child(3) .rank { color: #CD7F32; font-size: $font-size-xl; @media (max-width: $mobile) { font-size: $font-size-md; } } // Bronze
 
                 .score {
                     font-weight: bold;
@@ -310,6 +334,10 @@
                     flex: 1;
                     text-align: center;
                     letter-spacing: 1px;
+                    
+                    @media (max-width: $mobile) {
+                        font-size: $font-size-lg;
+                    }
                 }
 
                 .diff {
@@ -323,6 +351,13 @@
                     letter-spacing: 0.5px;
                     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 
+                    @media (max-width: $mobile) {
+                        width: 50px;
+                        padding: 4px;
+                        font-size: 10px;
+                        letter-spacing: 0;
+                    }
+
                     &.easy { background: $bg-color; color: $secondary-color; border: 1px solid $secondary-color; }
                     &.medium { background: $accent-color; color: $primary-color; }
                     &.hard { background: $secondary-color; color: $text-color-light; }
@@ -335,6 +370,11 @@
                     font-size: $font-size-md;
                     color: $text-color-dark;
                     opacity: 0.8;
+                    
+                    @media (max-width: $mobile) {
+                        width: 50px;
+                        font-size: 11px;
+                    }
                 }
             }
         }
@@ -344,6 +384,12 @@
             border: 2px solid $secondary-color;
             color: $secondary-color;
             border-radius: $border-radius-md;
+            
+            @media (max-width: $mobile) {
+                padding: 8px 16px;
+                font-size: $font-size-md;
+                margin-top: $spacing-lg;
+            }
             
             &:hover {
                 background: $secondary-color;

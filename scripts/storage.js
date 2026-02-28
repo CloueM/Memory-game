@@ -1,7 +1,7 @@
 export const LEADERBOARD_KEY = 'matchamoji-leaderboard';
 export const MAX_SCORES = 5;
 
-// Retrieve leaderboard from localStorage
+// get leaderboard from localStorage
 export function getLeaderboard() {
     var stored = localStorage.getItem(LEADERBOARD_KEY);
     if (stored) {
@@ -10,7 +10,7 @@ export function getLeaderboard() {
     return [];
 }
 
-// Save a new score to the leaderboard
+// Save new score to the leaderboard
 export function saveScore(score, difficulty, timeStr) {
     var leaderboard = getLeaderboard();
     
@@ -22,13 +22,13 @@ export function saveScore(score, difficulty, timeStr) {
         time: timeStr
     };
     
-    // Add to list and sort descending by score
+    // Add to list, then sort descending by score
     leaderboard.push(newEntry);
     leaderboard.sort(function(a, b) {
         return b.score - a.score;
     });
     
-    // Keep only top 3
+    // Keep only top 5
     if (leaderboard.length > MAX_SCORES) {
         leaderboard.slice(0, MAX_SCORES);
         leaderboard = leaderboard.slice(0, MAX_SCORES);
