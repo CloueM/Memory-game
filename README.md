@@ -31,16 +31,3 @@ If you want to modify the styling and explore the SCSS code:
 3. Install the **Live Sass Compiler** extension to compile any changes you make in the `.scss` files into the `styles/styles.css` output directory automatically.
 
 Enjoy flipping the cards! 🍵
-
-## Deployment (Hosting on SiteGround)
-
-Since this game consists entirely of static files (HTML, CSS, JavaScript, and assets), it is very easy to host it on any web server, including **SiteGround**.
-
-### Steps to Deploy on SiteGround:
-
-1. **Prepare your files**: Ensure you have compiled your SCSS into CSS (so the `styles/styles.css` file is up-to-date) and gather all your project files including `index.html`, the `scripts` folder, the `styles` folder, and the `assets` folder.
-2. **Log into SiteGround**: Go to your SiteGround Client Area and navigate to **Site Tools** for the website where you want to host the game.
-3. **Open File Manager**: Go to **Site > File Manager**.
-4. **Navigate to the public folder**: Open the `public_html` directory (or a specific subfolder inside it if you don't want it on your main homepage, e.g., `public_html/matchamoji`).
-5. **Upload the files**: Click the **File Upload** or **Folder Upload** button in the File Manager and upload all of your game's files directly into the chosen folder.
-6. **Play the game online**: Visit your domain in the browser (e.g., `https://yourdomain.com/matchamoji`) and the game should load instantly!
