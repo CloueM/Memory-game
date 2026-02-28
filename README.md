@@ -30,4 +30,4 @@ If you want to modify the styling and explore the SCSS code:
 2. Install the **Live Server** extension to serve the files locally.
 3. Install the **Live Sass Compiler** extension to compile any changes you make in the `.scss` files into the `styles/styles.css` output directory automatically.
 
-Enjoy flipping the cards! 🍵
+Enjoy! 🍵
