@@ -11,7 +11,8 @@ MatchaMoji is a fun, matcha-themed memory matching game!
 - Compete for the highest score, which is calculated based on your accuracy, time left, and chosen difficulty multiplier.
 
 ## How to Install & Play
-
+You can play it here: [View Live](https://clouemac.com/matchamoji/) 
+OR
 Since this is a client-side web application built with HTML, CSS (compiled from SCSS), and JavaScript, no complex installation or server setup is required.
 
 ### 1. Download the Game
