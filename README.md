@@ -11,7 +11,7 @@ MatchaMoji is a fun, matcha-themed memory matching game!
 - Compete for the highest score, which is calculated based on your accuracy, time left, and chosen difficulty multiplier.
 
 ## How to Install & Play
-You can play it here: [View Live](https://clouemac.com/matchamoji/) 
+You can play it here: [View Live](https://kurowii.com/matchamoji/) 
 OR
 Since this is a client-side web application built with HTML, CSS (compiled from SCSS), and JavaScript, no complex installation or server setup is required.
 
@@ -32,4 +32,4 @@ If you want to modify the styling and explore the SCSS code:
 3. Install the **Live Sass Compiler** extension to compile any changes you make in the `.scss` files into the `styles/styles.css` output directory automatically.
 
 Enjoy! 🍵
-[View Live](https://clouemac.com/matchamoji/)
+[View Live](https://kurowii.com/matchamoji/)
